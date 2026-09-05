@@ -1,0 +1,4 @@
+interface:
+  display_name: "Выполнение GitHub Issue"
+  short_description: "GitHub Issue, ветка, проверки и pull request"
+  default_prompt: "Используй $github-issue-flow, чтобы выполнить назначенную Issue в zero2python и подготовить проверенный pull request в рамках поручения."

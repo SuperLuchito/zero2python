@@ -1,0 +1,32 @@
+name: Исследование
+description: Получить ответ для продуктового или технического решения
+title: "[Исследование] "
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Какой вопрос нужно решить
+      description: Какое следующее действие зависит от ответа?
+    validations:
+      required: true
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Контекст и ограничения
+      description: Известные факты, материалы, границы исследования.
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: Готово, когда
+      description: Какой документ, сравнение или проверяемый эксперимент должен получиться?
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Источники и проверки
+      description: На чем должен основываться вывод и как проверить результат?
+    validations:
+      required: true

@@ -1,0 +1,29 @@
+# Локальная работа и временные результаты
+/work/
+/outputs/
+/worktrees/
+.DS_Store
+*.log
+
+# Секреты окружения; примеры конфигурации можно хранить в Git
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# Локальные среды и кэши
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+coverage/
+
+# Исходные учебные материалы и личные данные
+/materials/private/
+/data/private/

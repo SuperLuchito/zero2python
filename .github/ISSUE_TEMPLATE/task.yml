@@ -1,0 +1,40 @@
+name: Задача
+description: Функциональность, улучшение или техническая работа
+title: "[Задача] "
+body:
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Результат и контекст
+      description: Что должно измениться для пользователя или команды и зачем?
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Что сделать
+    validations:
+      required: true
+  - type: textarea
+    id: excluded
+    attributes:
+      label: Что не входит
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Готово, когда
+      description: Проверяемые критерии приемки, по одному на пункт.
+    validations:
+      required: true
+  - type: textarea
+    id: checks
+    attributes:
+      label: Проверки
+      description: Команды или ручные сценарии. Если команды еще неизвестны, укажите наблюдаемый результат.
+    validations:
+      required: true
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Зависимости и материалы
+      description: Блокирующие Issues, разделы документации, исходные материалы и открытые вопросы.

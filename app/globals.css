@@ -1,0 +1,420 @@
+:root {
+  --bg: #050505;
+  --fg: #ffb000;
+  --fg-dim: #a87200;
+  --fg-mute: #6b4a00;
+  --line: #ffb000;
+  --fail: #ff4d00;
+  --ok: #ffd060;
+  --scan: rgba(255, 176, 0, 0.14);
+  --font: var(--font-mono), ui-monospace, "IBM Plex Mono", "Cascadia Mono", Menlo, monospace;
+}
+
+* {
+  box-sizing: border-box;
+  border-radius: 0;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font);
+  font-size: 15px;
+  line-height: 1.45;
+  letter-spacing: 0.01em;
+}
+
+a {
+  color: var(--fg);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+button,
+textarea,
+input {
+  font-family: inherit;
+  color: inherit;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 0;
+}
+
+button {
+  cursor: pointer;
+  padding: 8px 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+button:hover:not(:disabled) {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+button.ghost {
+  border-color: var(--fg-dim);
+  color: var(--fg-dim);
+}
+
+.frame {
+  border: 1px solid var(--line);
+  position: relative;
+}
+
+.frame::before,
+.frame::after {
+  content: "";
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border: 1px solid var(--line);
+  pointer-events: none;
+}
+
+.frame::before {
+  top: -1px;
+  left: -1px;
+  border-right: 0;
+  border-bottom: 0;
+}
+
+.frame::after {
+  bottom: -1px;
+  right: -1px;
+  border-left: 0;
+  border-top: 0;
+}
+
+.hair {
+  border: 1px solid var(--line);
+}
+
+.dim {
+  color: var(--fg-dim);
+}
+
+.mute {
+  color: var(--fg-mute);
+}
+
+.fail {
+  color: var(--fail);
+}
+
+.ok {
+  color: var(--ok);
+}
+
+.cursor {
+  display: inline-block;
+  width: 0.65ch;
+  height: 1.05em;
+  background: var(--fg);
+  margin-left: 1px;
+  vertical-align: text-bottom;
+  animation: blink 1.05s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes scan {
+  0% {
+    background-position: 0 -100%;
+  }
+  100% {
+    background-position: 0 200%;
+  }
+}
+
+@keyframes pulse-border {
+  0%,
+  100% {
+    box-shadow: inset 0 0 0 1px var(--fg);
+  }
+  50% {
+    box-shadow: inset 0 0 0 1px var(--ok), 0 0 18px var(--scan);
+  }
+}
+
+.running {
+  animation: pulse-border 0.7s linear infinite;
+  background-image: linear-gradient(
+    180deg,
+    transparent 0%,
+    var(--scan) 48%,
+    transparent 100%
+  );
+  background-size: 100% 40%;
+  animation: pulse-border 0.7s linear infinite, scan 0.9s linear infinite;
+}
+
+.boot-wrap {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.boot {
+  width: min(720px, 100%);
+  min-height: 420px;
+  padding: 28px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.boot pre {
+  margin: 0;
+  white-space: pre-wrap;
+  font-size: 16px;
+}
+
+.boot-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+}
+
+.strip {
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid var(--line);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.strip a,
+.strip span {
+  padding: 10px 16px;
+  border-right: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.strip .grow {
+  flex: 1;
+  border-right: 0;
+}
+
+.bar {
+  height: 4px;
+  background: #1a1200;
+  width: 120px;
+  border: 1px solid var(--fg-mute);
+}
+
+.bar > i {
+  display: block;
+  height: 100%;
+  background: var(--fg);
+}
+
+.shell {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 28px 20px 80px;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  margin: 0 0 12px;
+}
+
+h1 {
+  font-size: 22px;
+}
+
+.prose {
+  max-width: 68ch;
+}
+
+.prose p {
+  margin: 0 0 12px;
+}
+
+.modules {
+  display: grid;
+  gap: 18px;
+}
+
+.module {
+  padding: 0;
+}
+
+.module header {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.lesson-row {
+  display: grid;
+  grid-template-columns: 72px 1fr auto;
+  gap: 12px;
+  padding: 12px 14px;
+  border-bottom: 1px solid #2a1c00;
+  align-items: center;
+}
+
+.lesson-row:last-child {
+  border-bottom: 0;
+}
+
+.lesson-row:hover {
+  background: #0d0a00;
+}
+
+.status {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.split {
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) minmax(320px, 1.15fr);
+  gap: 16px;
+  align-items: stretch;
+}
+
+@media (max-width: 900px) {
+  .split {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pane {
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+}
+
+.pane-h {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--line);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: space-between;
+}
+
+.editor {
+  flex: 1;
+  width: 100%;
+  resize: none;
+  border: 0;
+  padding: 12px;
+  font-size: 13px;
+  line-height: 1.5;
+  outline: none;
+  min-height: 280px;
+  tab-size: 4;
+}
+
+.out {
+  margin: 0;
+  padding: 12px;
+  font-size: 12px;
+  white-space: pre-wrap;
+  min-height: 120px;
+  border-top: 1px solid var(--line);
+  max-height: 220px;
+  overflow: auto;
+}
+
+.row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 10px 12px;
+  border-top: 1px solid var(--line);
+}
+
+.tasks {
+  display: flex;
+  gap: 6px;
+  margin: 16px 0;
+}
+
+.tasks button.active {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.hint-box,
+.debrief {
+  margin-top: 16px;
+  padding: 12px;
+  border: 1px dashed var(--fg-dim);
+  font-size: 14px;
+}
+
+.debrief {
+  border-style: solid;
+}
+
+.examples {
+  font-size: 12px;
+  color: var(--fg-dim);
+  margin: 12px 0;
+}
+
+.examples code {
+  color: var(--fg);
+}
+
+code {
+  font-family: inherit;
+}
+
+.qotd-choices {
+  display: grid;
+  gap: 8px;
+  margin: 20px 0;
+}
+
+.qotd-choices button {
+  text-align: left;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 14px;
+  padding: 12px;
+}
+
+.qotd-choices button.picked {
+  background: var(--fg);
+  color: var(--bg);
+}
