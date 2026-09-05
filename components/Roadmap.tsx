@@ -1,64 +1,91 @@
 "use client";
-
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { lessonById, lessons, modules } from "@/content/curriculum";
-import { getProgress, lessonStatus } from "@/lib/storage";
-import type { Progress } from "@/lib/storage";
-
-const LABEL: Record<string, string> = {
-  empty: "—",
-  partial: "в работе",
-  hinted: "подсказка",
-  done: "закрыт",
+import {
+  allTaskKeys,
+  lessonById,
+  lessons,
+  modules,
+} from "@/content/curriculum";
+import { counts, lessonStatus } from "@/lib/progress";
+import { blockingLesson, lessonDone, orderedLessons } from "@/lib/access";
+import { useProgress } from "./ProgressProvider";
+import { CourseSwitch } from "./CourseSwitch";
+const LABEL = {
+  empty: "Доступен",
+  partial: "В работе",
+  hinted: "В работе · подсказка",
+  done: "Пройден",
 };
-
 export function Roadmap() {
-  const [p, setP] = useState<Progress>({ tasks: {}, qotd: {} });
-  useEffect(() => setP(getProgress()), []);
-
+  const { progress: p, ready } = useProgress();
+  const next = orderedLessons.find((l) => !lessonDone(l.id, p));
+  const c = counts(p.tasks, allTaskKeys());
   return (
     <div className="shell">
-      <h1>карта</h1>
-      <p className="dim prose">
-        База коротко, потом pandas, потом ямы. Вопрос дня не из текущего урока —
-        он сам по себе, каждый календарный день один.
+      <p className="eyebrow">zero2python / учебный маршрут</p>
+      <h1>Карта обучения</h1>
+      <CourseSwitch />
+      <p className="prose dim">
+        Решите все задания урока, чтобы открыть следующий. Подсказки допустимы;
+        «Сдаться» не засчитывается. Вопрос дня доступен независимо от курса.
       </p>
-      <div className="modules" style={{ marginTop: 24 }}>
-        {modules.map((m) => (
-          <section key={m.id} className="frame module">
-            <header>
-              <span>{m.title}</span>
-              <span className="dim">{m.blurb}</span>
-            </header>
-            {m.lessonIds.map((id) => {
-              const l = lessonById[id];
-              const st = lessonStatus(
-                l.id,
-                l.tasks.map((t) => t.id),
-                p.tasks,
-              );
-              return (
-                <Link key={id} href={`/app/lesson/${id}`} className="lesson-row">
-                  <span className="mute">{l.minutes} мин</span>
-                  <span>
-                    {l.title}
-                    {l.needsPandas ? (
-                      <span className="dim"> · pandas</span>
-                    ) : null}
-                  </span>
-                  <span className={`status ${st === "done" ? "ok" : "dim"}`}>
-                    {LABEL[st]}
-                  </span>
-                </Link>
-              );
-            })}
-          </section>
-        ))}
-      </div>
-      <p className="mute" style={{ marginTop: 28, fontSize: 12 }}>
-        уроков {lessons.length} · задач {lessons.reduce((n, l) => n + l.tasks.length, 0)}
-      </p>
+      {!ready ? (
+        <p role="status">Загружаем прогресс…</p>
+      ) : (
+        <>
+          <div className="course-summary">
+            <span>
+              {c.done}/{c.total} задач ·{" "}
+              {orderedLessons.filter((l) => lessonDone(l.id, p)).length}/
+              {lessons.length} уроков
+            </span>
+            {next ? (
+              <Link className="action-link" href={`/app/lesson/${next.id}`}>
+                Продолжить →
+              </Link>
+            ) : (
+              <span className="ok">Все уроки пройдены. Можно повторять!</span>
+            )}
+          </div>
+          <div className="modules">
+            {modules.map((m) => (
+              <section key={m.id} className="frame module">
+                <header>
+                  <h2>{m.title}</h2>
+                  <span className="dim">{m.blurb}</span>
+                </header>
+                {m.lessonIds.map((id) => {
+                  const l = lessonById[id],
+                    blocker = blockingLesson(id, p),
+                    status = lessonStatus(
+                      id,
+                      l.tasks.map((t) => t.id),
+                      p.tasks,
+                    );
+                  return (
+                    <Link
+                      key={id}
+                      href={`/app/lesson/${id}`}
+                      className={`lesson-row ${blocker ? "locked" : ""}`}
+                    >
+                      <span className="dim">{l.minutes} мин</span>
+                      <span>
+                        {l.title}
+                        {blocker && <small>Сначала: {blocker.title}</small>}
+                      </span>
+                      <span
+                        className={`status ${status === "done" ? "ok" : "dim"}`}
+                      >
+                        {blocker ? "Закрыт" : LABEL[status]}
+                      </span>
+                    </Link>
+                  );
+                })}
+              </section>
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 }
