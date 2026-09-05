@@ -5,7 +5,10 @@ const INDEX = "https://cdn.jsdelivr.net/pyodide/v0.26.4/full/";
 type Pyodide = {
   loadPackage: (names: string[]) => Promise<unknown>;
   runPythonAsync: (code: string) => Promise<unknown>;
-  globals: { set: (k: string, v: unknown) => void; get: (k: string) => unknown };
+  globals: {
+    set: (k: string, v: unknown) => void;
+    get: (k: string) => unknown;
+  };
 };
 
 declare global {
@@ -45,7 +48,12 @@ export async function bootPython(
         return inst;
       })();
     }
-    py = await loading;
+    try {
+      py = await loading;
+    } catch (error) {
+      loading = null;
+      throw error;
+    }
   }
   if (needPandas && !pandasReady) {
     line("> pandas не в hot path. тяну numpy/pandas через micropip…");
@@ -83,7 +91,10 @@ OK = _ok
 ERR = _err
 `;
 
-export async function runTests(user: string, tests: string): Promise<RunResult> {
+export async function runTests(
+  user: string,
+  tests: string,
+): Promise<RunResult> {
   if (!py) throw new Error("python not booted");
   py.globals.set("USER_SRC", user);
   py.globals.set("TEST_SRC", tests);

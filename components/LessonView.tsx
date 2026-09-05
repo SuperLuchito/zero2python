@@ -1,221 +1,276 @@
 "use client";
-
-import { useCallback, useEffect, useMemo, useState } from "react";
-import type { Lesson, TaskMark } from "@/lib/types";
-import { getProgress, markTask, taskKey } from "@/lib/storage";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import type { Lesson } from "@/lib/types";
+import { markTask, taskKey } from "@/lib/storage";
+import { isSolved } from "@/lib/progress";
+import { blockingLesson, lessonDone, orderedLessons } from "@/lib/access";
 import { bootPython, runOpen, runTests } from "@/lib/pyodide";
-
-function ping() {
-  window.dispatchEvent(new Event("py-term-progress"));
-}
+import { useProgress } from "./ProgressProvider";
 
 export function LessonView({ lesson }: { lesson: Lesson }) {
-  const [idx, setIdx] = useState(0);
-  const task = lesson.tasks[idx];
-  const [code, setCode] = useState(task.starter);
-  const [log, setLog] = useState("idle.");
-  const [busy, setBusy] = useState(false);
-  const [ready, setReady] = useState(false);
-  const [showHint, setShowHint] = useState(false);
-  const [showDebrief, setShowDebrief] = useState(false);
-  const [mark, setMark] = useState<TaskMark>("untouched");
-  const [tele, setTele] = useState("");
-
-  const keys = useMemo(
-    () => lesson.tasks.map((t) => taskKey(lesson.id, t.id)),
-    [lesson],
-  );
-
-  const loadMark = useCallback(() => {
-    const p = getProgress();
-    setMark(p.tasks[taskKey(lesson.id, task.id)] ?? "untouched");
-  }, [lesson.id, task.id]);
-
-  useEffect(() => {
-    setCode(task.starter);
-    setLog("idle.");
-    setTele("");
-    const p = getProgress();
-    const m = p.tasks[taskKey(lesson.id, task.id)] ?? "untouched";
-    setMark(m);
-    setShowHint(m === "hinted" || m === "solved_hinted");
-    setShowDebrief(m === "solved" || m === "solved_hinted" || m === "gave_up");
-  }, [task, loadMark]);
-
+  const { progress, ready } = useProgress();
+  if (!ready)
+    return (
+      <div className="shell" role="status">
+        Проверяем доступ к уроку…
+      </div>
+    );
+  const blocker = blockingLesson(lesson.id, progress);
+  if (blocker)
+    return (
+      <div className="shell">
+        <p className="eyebrow">Python / урок закрыт</p>
+        <h1>{lesson.title}</h1>
+        <section className="frame empty-state">
+          <h2>Сначала пройдите предыдущий урок</h2>
+          <p>
+            Решите все задания урока «{blocker.title}». Подсказки допустимы,
+            «Сдаться» не засчитывается.
+          </p>
+          <Link className="action-link" href={`/app/lesson/${blocker.id}`}>
+            К уроку «{blocker.title}» →
+          </Link>
+        </section>
+        <p>
+          <Link href="/app">← Карта обучения</Link>
+        </p>
+      </div>
+    );
+  return <LessonWorkspace key={lesson.id} lesson={lesson} />;
+}
+function LessonWorkspace({ lesson }: { lesson: Lesson }) {
+  const { progress } = useProgress();
+  const [idx, setIdx] = useState(0),
+    task = lesson.tasks[idx];
+  const [drafts, setDrafts] = useState<Record<string, string>>({});
+  const code = drafts[task.id] ?? task.starter;
+  const [log, setLog] = useState("Загрузка Python…");
+  const [busy, setBusy] = useState(false),
+    [ready, setReady] = useState(false);
+  const [bootAttempt, setBootAttempt] = useState(0),
+    [bootError, setBootError] = useState(false);
+  const mark = progress.tasks[taskKey(lesson.id, task.id)] ?? "untouched";
+  const [hintFor, setHintFor] = useState<string | null>(null);
+  const showHint =
+    hintFor === task.id || mark === "hinted" || mark === "solved_hinted";
+  const showDebrief = isSolved(mark) || mark === "gave_up";
+  const done = lessonDone(lesson.id, progress);
+  const next =
+    orderedLessons[orderedLessons.findIndex((l) => l.id === lesson.id) + 1];
   useEffect(() => {
     let live = true;
-    (async () => {
-      try {
-        await bootPython(lesson.needsPandas, (s) => {
-          if (live) setLog((prev) => (prev === "idle." ? s : prev + "\n" + s));
-        });
-        if (live) setReady(true);
-      } catch (e) {
-        if (live)
-          setLog("fail: " + (e instanceof Error ? e.message : String(e)));
-      }
-    })();
+    setBootError(false);
+    bootPython(lesson.needsPandas, (line) => {
+      if (live) setLog((prev) => prev + "\n" + line);
+    })
+      .then(() => {
+        if (live) {
+          setReady(true);
+          setLog("Python готов. Введите решение и запустите проверки.");
+        }
+      })
+      .catch((e) => {
+        if (live) {
+          setBootError(true);
+          setLog(
+            "Не удалось загрузить Python. Проверьте сеть. " +
+              (e as Error).message,
+          );
+        }
+      });
     return () => {
       live = false;
     };
-  }, [lesson.needsPandas]);
-
-  async function typeOut(text: string) {
-    setTele("");
-    for (let i = 1; i <= text.length; i++) {
-      setTele(text.slice(0, i));
-      if (i % 3 === 0) await new Promise((r) => setTimeout(r, 8));
-    }
-  }
-
+  }, [lesson.needsPandas, bootAttempt]);
   async function onRun(kind: "tests" | "open") {
     if (!ready || busy) return;
     setBusy(true);
-    setLog("> run");
+    setLog("Выполняется…");
     try {
       const res =
         kind === "tests"
           ? await runTests(code, task.tests)
           : await runOpen(code);
-      const body = [
-        res.ok ? "status: ok" : "status: fail",
-        res.stdout ? "stdout:\n" + res.stdout : "stdout: (пусто)",
-        res.error ? "traceback:\n" + res.error : "",
-      ]
-        .filter(Boolean)
-        .join("\n");
-      await typeOut(body);
-      setLog(body);
-      if (kind === "tests" && res.ok) {
-        const next = markTask(lesson.id, task.id, "solved");
-        setMark(next.tasks[taskKey(lesson.id, task.id)]);
-        setShowDebrief(true);
-        ping();
-      }
+      setLog(
+        [
+          res.ok
+            ? kind === "tests"
+              ? "Все проверки пройдены."
+              : "Выполнено. Для зачета задачи запустите проверки."
+            : "Ошибка. Исправьте решение и попробуйте снова.",
+          res.stdout ? `Вывод:\n${res.stdout}` : "Вывод: (пусто)",
+          res.error,
+        ]
+          .filter(Boolean)
+          .join("\n\n"),
+      );
+      if (kind === "tests" && res.ok) markTask(lesson.id, task.id, "solved");
     } catch (e) {
-      setLog("fail: " + (e instanceof Error ? e.message : String(e)));
+      setLog("Ошибка: " + (e as Error).message);
     } finally {
       setBusy(false);
     }
   }
-
-  function onHint() {
-    markTask(lesson.id, task.id, "hinted");
-    setShowHint(true);
-    loadMark();
-    ping();
-  }
-
-  function onGiveUp() {
-    markTask(lesson.id, task.id, "gave_up");
-    setShowDebrief(true);
-    loadMark();
-    ping();
-  }
-
   return (
-    <div className="shell">
-      <p className="mute" style={{ letterSpacing: "0.14em", fontSize: 11 }}>
-        {lesson.module} · {lesson.minutes} мин
-        {lesson.needsPandas ? " · pandas" : ""}
+    <div className="shell lesson-shell">
+      <p>
+        <Link href="/app">← Карта обучения</Link>
       </p>
-      <h1>{lesson.title}</h1>
-      <div className="prose">
-        {lesson.body.map((p) => (
-          <p key={p}>{p}</p>
-        ))}
-      </div>
-      <div className="tasks">
-        {lesson.tasks.map((t, i) => (
-          <button
-            key={t.id}
-            className={i === idx ? "active" : "ghost"}
-            onClick={() => setIdx(i)}
-          >
-            {i + 1}. {t.title}
-          </button>
-        ))}
-      </div>
       <div className="split">
-        <div className="frame pane">
-          <div className="pane-h">
-            <span>бриф</span>
-            <span className="dim">{mark}</span>
-          </div>
-          <div style={{ padding: 12, flex: 1 }}>
+        <section
+          className="frame material-pane"
+          aria-label="Материал и задание"
+        >
+          <div className="pane-content">
+            <p className="eyebrow">
+              {lesson.module} · {lesson.minutes} мин
+              {lesson.needsPandas ? " · pandas" : ""}
+            </p>
+            <h1>{lesson.title}</h1>
+            <div className="prose">
+              {lesson.body.map((p) => (
+                <p key={p}>{p}</p>
+              ))}
+            </div>
+            <div className="tasks" aria-label="Задания урока">
+              {lesson.tasks.map((t, i) => (
+                <button
+                  key={t.id}
+                  className={i === idx ? "active" : "ghost"}
+                  aria-pressed={i === idx}
+                  disabled={busy}
+                  onClick={() => {
+                    setIdx(i);
+                    setLog(
+                      "Выбрано задание. Черновик сохранен до ухода из урока.",
+                    );
+                  }}
+                >
+                  {i + 1}. {t.title}
+                  {isSolved(progress.tasks[taskKey(lesson.id, t.id)])
+                    ? " ✓"
+                    : ""}
+                </button>
+              ))}
+            </div>
+            <h2>{task.title}</h2>
+            <p className="status">
+              {isSolved(mark)
+                ? "Решено"
+                : mark === "gave_up"
+                  ? "Разбор открыт · не засчитано"
+                  : "Предстоит решить"}
+            </p>
             <p>{task.prompt}</p>
             <div className="examples">
-              видно:
+              <h3>Примеры</h3>
               {task.examples.map((e) => (
-                <div key={e}>
+                <p key={e}>
                   <code>{e}</code>
-                </div>
+                </p>
               ))}
-              скрытые тесты — нет. они просто падают.
             </div>
-            {showHint ? <div className="hint-box">{task.hint}</div> : null}
-            {showDebrief ? (
-              <div className="debrief">{task.debrief}</div>
-            ) : null}
-            <div className="row" style={{ borderTop: 0, padding: "12px 0 0" }}>
+            <div className="row actions-inline">
               <button
                 className="ghost"
-                onClick={onHint}
-                disabled={showHint || mark === "solved"}
+                disabled={showHint || busy}
+                onClick={() => {
+                  setHintFor(task.id);
+                  markTask(lesson.id, task.id, "hinted");
+                }}
               >
-                подсказка
+                Подсказка
               </button>
-              <button className="ghost" onClick={onGiveUp}>
-                сдаться
+              <button
+                className="ghost"
+                disabled={busy || showDebrief}
+                onClick={() => markTask(lesson.id, task.id, "gave_up")}
+              >
+                Сдаться
               </button>
             </div>
+            {showHint && (
+              <aside className="hint-box">
+                <h3>Подсказка</h3>
+                {task.hint}
+              </aside>
+            )}
+            {showDebrief && (
+              <aside className="debrief">
+                <h3>Разбор</h3>
+                {task.debrief}
+                {!isSolved(mark) && (
+                  <p>
+                    Задание еще не решено. Напишите код и пройдите проверки для
+                    зачета.
+                  </p>
+                )}
+              </aside>
+            )}
+            {done && (
+              <div className="debrief" role="status">
+                <p>Все задания урока решены.</p>
+                {next ? (
+                  <Link className="action-link" href={`/app/lesson/${next.id}`}>
+                    Следующий урок: {next.title} →
+                  </Link>
+                ) : (
+                  <Link className="action-link" href="/app/progress">
+                    Посмотреть результаты →
+                  </Link>
+                )}
+              </div>
+            )}
           </div>
-        </div>
-        <div className={`frame pane ${busy ? "running" : ""}`}>
+        </section>
+        <section
+          className={`frame pane editor-pane ${busy ? "running" : ""}`}
+          aria-label="Редактор Python"
+        >
           <div className="pane-h">
-            <span>editor.py</span>
-            <span className="dim">{ready ? "pyodide" : "boot"}</span>
+            <label htmlFor="python-editor">editor.py</label>
+            <span>{ready ? "Python готов" : "Загрузка"}</span>
           </div>
           <textarea
+            id="python-editor"
             className="editor"
             value={code}
             spellCheck={false}
-            onKeyDown={(e) => {
-              if (e.key === "Tab") {
-                e.preventDefault();
-                const el = e.currentTarget;
-                const s = el.selectionStart;
-                const t = el.selectionEnd;
-                const next = code.slice(0, s) + "    " + code.slice(t);
-                setCode(next);
-                requestAnimationFrame(() => {
-                  el.selectionStart = el.selectionEnd = s + 4;
-                });
-              }
-            }}
-            onChange={(e) => setCode(e.target.value)}
+            autoCapitalize="off"
+            autoCorrect="off"
+            disabled={busy}
+            onChange={(e) =>
+              setDrafts((prev) => ({ ...prev, [task.id]: e.target.value }))
+            }
+            aria-describedby="editor-help"
           />
+          <p id="editor-help" className="editor-help dim">
+            Отступ — 4 пробела. Tab переводит фокус к кнопкам.
+          </p>
           <div className="row">
             <button disabled={!ready || busy} onClick={() => onRun("tests")}>
-              run tests
+              Проверить решение
             </button>
             <button
               className="ghost"
               disabled={!ready || busy}
               onClick={() => onRun("open")}
             >
-              run
+              Запустить код
             </button>
+            {bootError && (
+              <button onClick={() => setBootAttempt((n) => n + 1)}>
+                Повторить загрузку
+              </button>
+            )}
           </div>
-          <pre className="out">
-            {tele || log}
-            {busy ? <span className="cursor" /> : null}
+          <div className="pane-h">Вывод и ошибки</div>
+          <pre className="out" role="status" aria-live="polite">
+            {log}
           </pre>
-        </div>
+        </section>
       </div>
-      <p className="mute" style={{ marginTop: 16, fontSize: 11 }}>
-        слоты {keys.length}
-      </p>
     </div>
   );
 }

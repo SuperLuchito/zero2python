@@ -9,8 +9,8 @@ const mono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "терминал",
-  description: "соло-консоль для практики Python",
+  title: "zero2python · учебный терминал",
+  description: "Python, нейросети и анализ данных для команды",
 };
 
 export default function RootLayout({
