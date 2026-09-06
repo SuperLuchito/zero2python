@@ -1,11 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { allTaskKeys } from "@/content/curriculum";
 import { counts, getProgress } from "@/lib/storage";
 
 export function ProgressStrip() {
+  const pathname = usePathname();
   const [done, setDone] = useState(0);
   const [hinted, setHinted] = useState(0);
   const total = allTaskKeys().length;
@@ -31,9 +33,10 @@ export function ProgressStrip() {
   const pct = total ? Math.round((done / total) * 100) : 0;
 
   return (
-    <nav className="strip">
-      <Link href="/app">карта</Link>
-      <Link href="/app/qotd">вопрос дня</Link>
+    <nav className="strip" aria-label="Главная навигация">
+      <Link className="brand" href="/" aria-label="zero2python — главная"><b aria-hidden="true">z<span>2</span></b><strong>zero2python</strong></Link>
+      <Link href="/app" aria-current={pathname === "/app" || pathname.startsWith("/app/lesson") ? "page" : undefined}><i aria-hidden="true">◇</i> Карта</Link>
+      <Link href="/app/qotd" aria-current={pathname === "/app/qotd" ? "page" : undefined}><i aria-hidden="true">✳</i> Вопрос дня</Link>
       <span className="grow dim">
         задачи {done}/{total}
         {hinted ? ` · подсказок ${hinted}` : ""}

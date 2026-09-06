@@ -6,7 +6,7 @@ export function BootScreen() {
     <div className="welcome-body">
       <div className="code-orbit" aria-hidden="true"><span>(</span><i>py</i><span>)</span><b /></div>
       <p className="eyebrow">PYTHON · ML · COMPUTER VISION</p>
-      <h1>Большие идеи.<br />С первой строки.</h1>
+      <h1>Большие идеи.<br /><em>С первой строки.</em></h1>
       <p>Разбирайтесь в теории, экспериментируйте с кодом<br />и превращайте знания в работающие решения.</p>
       <Link className="welcome-start" href="/app">Начать учиться <span>↗</span></Link>
     </div>

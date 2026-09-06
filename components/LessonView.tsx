@@ -117,7 +117,7 @@ export function LessonView({ lesson }: { lesson: Lesson }) {
       <p><Link href="/app">← Карта обучения</Link></p>
       <div className="split">
       <section className="material-pane">
-      <div className="pane-h material-heading">Теория и практика <span>Python / {idx + 1} из {keys.length}</span></div>
+      <div className="pane-h material-heading"><strong><i aria-hidden="true">◈</i> Теория и практика</strong> <span>Python / {idx + 1} из {keys.length}</span></div>
       <div className="pane-content">
       <p className="mute" style={{ letterSpacing: "0.14em", fontSize: 11 }}>
         {lesson.module} · {lesson.minutes} мин
@@ -211,7 +211,7 @@ export function LessonView({ lesson }: { lesson: Lesson }) {
           />
           </div></div>
           <p id="editor-help" className="editor-help dim">Tab — отступ · Shift+Tab или Esc — выйти из редактора</p>
-          <div className="pane-h">Результат</div>
+          <div className="pane-h result-heading"><span><i aria-hidden="true">↳</i> Результат</span><span className="result-caption">Ваша идея в действии</span></div>
           <pre key={runNumber} className="out" role="status">{tele || log}</pre>
           <div className="row actions-bar">
             <button id="lesson-check" disabled={!ready || busy} onClick={() => onRun("tests")}>

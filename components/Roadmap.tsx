@@ -18,17 +18,17 @@ export function Roadmap() {
   useEffect(() => setP(getProgress()), []);
 
   return (
-    <div className="shell">
-      <h1>карта</h1>
-      <p className="dim prose">
-        База коротко, потом pandas, потом ямы. Вопрос дня не из текущего урока —
-        он сам по себе, каждый календарный день один.
-      </p>
+    <div className="shell roadmap-shell">
+      <header className="roadmap-intro">
+        <div><p className="eyebrow">ВАША ЛАБОРАТОРИЯ ЗНАНИЙ</p><h1>От любопытства<br />к <em>первой программе.</em></h1>
+        <p className="dim prose">Одна тема, небольшой эксперимент, новый навык.<br />Выберите урок и попробуйте идею в коде.</p></div>
+        <div className="roadmap-art" aria-hidden="true"><span className="art-star">✳</span><span className="art-code">[ идея ]<br /><b>↓</b><br />{"{ код }"}</span><span className="art-dot" /></div>
+      </header>
       <div className="modules" style={{ marginTop: 24 }}>
-        {modules.map((m) => (
-          <section key={m.id} className="frame module">
+        {modules.map((m, index) => (
+          <section key={m.id} className="frame module" data-tone={index % 3}>
             <header>
-              <span>{m.title}</span>
+              <span className="module-title"><b className="module-number">0{index + 1}</b>{m.title}</span>
               <span className="dim">{m.blurb}</span>
             </header>
             {m.lessonIds.map((id) => {
