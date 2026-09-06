@@ -1,0 +1,10 @@
+const assert = require("node:assert/strict");
+const ts = require("typescript");
+const fs = require("node:fs");
+const m = { exports: {} };
+new Function("exports", ts.transpileModule(fs.readFileSync("lib/highlight.ts", "utf8"), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020 } }).outputText)(m.exports);
+const html = m.exports.highlightPython('def append_copy(xs, v):\n    return xs + [v] # copy');
+for (const token of ["tok-kw", "tok-fn", "tok-param", "tok-op", "tok-com"]) assert(html.includes(token));
+assert.equal(html.replace(/<[^>]+>/g, ""), 'def append_copy(xs, v):\n    return xs + [v] # copy');
+assert(!m.exports.highlightPython('<script>alert("x")</script>').includes("<script>"));
+console.log("Python highlighting: tokens, text preservation, escaping passed");

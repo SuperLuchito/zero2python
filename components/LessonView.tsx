@@ -1,6 +1,8 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import Link from "next/link";
+import { highlightPython } from "@/lib/highlight";
 import type { Lesson, TaskMark } from "@/lib/types";
 import { getProgress, markTask, taskKey } from "@/lib/storage";
 import { bootPython, runOpen, runTests } from "@/lib/pyodide";
@@ -20,6 +22,9 @@ export function LessonView({ lesson }: { lesson: Lesson }) {
   const [showDebrief, setShowDebrief] = useState(false);
   const [mark, setMark] = useState<TaskMark>("untouched");
   const [tele, setTele] = useState("");
+  const highlightRef = useRef<HTMLPreElement>(null);
+  const gutterRef = useRef<HTMLDivElement>(null);
+  const [runNumber, setRunNumber] = useState(0);
 
   const keys = useMemo(
     () => lesson.tasks.map((t) => taskKey(lesson.id, t.id)),
@@ -60,18 +65,11 @@ export function LessonView({ lesson }: { lesson: Lesson }) {
     };
   }, [lesson.needsPandas]);
 
-  async function typeOut(text: string) {
-    setTele("");
-    for (let i = 1; i <= text.length; i++) {
-      setTele(text.slice(0, i));
-      if (i % 3 === 0) await new Promise((r) => setTimeout(r, 8));
-    }
-  }
-
   async function onRun(kind: "tests" | "open") {
     if (!ready || busy) return;
     setBusy(true);
-    setLog("> run");
+    setTele("");
+    setLog("Выполняется…");
     try {
       const res =
         kind === "tests"
@@ -84,7 +82,8 @@ export function LessonView({ lesson }: { lesson: Lesson }) {
       ]
         .filter(Boolean)
         .join("\n");
-      await typeOut(body);
+      setTele(body);
+      setRunNumber(n => n + 1);
       setLog(body);
       if (kind === "tests" && res.ok) {
         const next = markTask(lesson.id, task.id, "solved");
@@ -114,7 +113,12 @@ export function LessonView({ lesson }: { lesson: Lesson }) {
   }
 
   return (
-    <div className="shell">
+    <div className="shell lesson-shell">
+      <p><Link href="/app">← Карта обучения</Link></p>
+      <div className="split">
+      <section className="material-pane">
+      <div className="pane-h material-heading">Теория и практика <span>Python / {idx + 1} из {keys.length}</span></div>
+      <div className="pane-content">
       <p className="mute" style={{ letterSpacing: "0.14em", fontSize: 11 }}>
         {lesson.module} · {lesson.minutes} мин
         {lesson.needsPandas ? " · pandas" : ""}
@@ -130,28 +134,28 @@ export function LessonView({ lesson }: { lesson: Lesson }) {
           <button
             key={t.id}
             className={i === idx ? "active" : "ghost"}
+            disabled={busy}
             onClick={() => setIdx(i)}
           >
             {i + 1}. {t.title}
           </button>
         ))}
       </div>
-      <div className="split">
-        <div className="frame pane">
+        <div className="task-content">
           <div className="pane-h">
-            <span>бриф</span>
-            <span className="dim">{mark}</span>
+            <span>Практика</span>
+            <span className="dim">{mark === "solved" || mark === "solved_hinted" ? "Решено" : "Предстоит решить"}</span>
           </div>
           <div style={{ padding: 12, flex: 1 }}>
             <p>{task.prompt}</p>
             <div className="examples">
-              видно:
+              Примеры:
               {task.examples.map((e) => (
                 <div key={e}>
-                  <code>{e}</code>
+                  <code dangerouslySetInnerHTML={{ __html: highlightPython(e) }} />
                 </div>
               ))}
-              скрытые тесты — нет. они просто падают.
+
             </div>
             {showHint ? <div className="hint-box">{task.hint}</div> : null}
             {showDebrief ? (
@@ -171,17 +175,27 @@ export function LessonView({ lesson }: { lesson: Lesson }) {
             </div>
           </div>
         </div>
-        <div className={`frame pane ${busy ? "running" : ""}`}>
+      </div></section>
+        <section className={`pane editor-pane ${busy ? "running" : ""}`} aria-label="Редактор Python">
           <div className="pane-h">
-            <span>editor.py</span>
-            <span className="dim">{ready ? "pyodide" : "boot"}</span>
+            <label htmlFor="python-editor">practice.py</label>
+            <span className="runtime-state"><i className="runtime-dot" />{busy ? "Выполняется" : ready ? "Python готов" : "Загрузка Python"}</span>
           </div>
+          <div className="editor-wrap">
+          <div ref={gutterRef} className="editor-gutter" aria-hidden="true">{code.split("\n").map((_, i) => i + 1).join("\n")}</div>
+          <div className="editor-stack">
+          <pre ref={highlightRef} className="editor-highlight" aria-hidden="true"><code dangerouslySetInnerHTML={{ __html: highlightPython(code) + (code.endsWith("\n") ? "\n" : "") }} /></pre>
           <textarea
+            id="python-editor"
+            aria-describedby="editor-help"
+            disabled={busy}
+            onScroll={e => { if (highlightRef.current) { highlightRef.current.scrollTop = e.currentTarget.scrollTop; highlightRef.current.scrollLeft = e.currentTarget.scrollLeft; } if (gutterRef.current) gutterRef.current.scrollTop = e.currentTarget.scrollTop; }}
             className="editor"
             value={code}
             spellCheck={false}
             onKeyDown={(e) => {
-              if (e.key === "Tab") {
+              if (e.key === "Escape") document.getElementById("lesson-check")?.focus();
+              if (e.key === "Tab" && !e.shiftKey) {
                 e.preventDefault();
                 const el = e.currentTarget;
                 const s = el.selectionStart;
@@ -195,27 +209,24 @@ export function LessonView({ lesson }: { lesson: Lesson }) {
             }}
             onChange={(e) => setCode(e.target.value)}
           />
-          <div className="row">
-            <button disabled={!ready || busy} onClick={() => onRun("tests")}>
-              run tests
+          </div></div>
+          <p id="editor-help" className="editor-help dim">Tab — отступ · Shift+Tab или Esc — выйти из редактора</p>
+          <div className="pane-h">Результат</div>
+          <pre key={runNumber} className="out" role="status">{tele || log}</pre>
+          <div className="row actions-bar">
+            <button id="lesson-check" disabled={!ready || busy} onClick={() => onRun("tests")}>
+              Проверить решение
             </button>
             <button
               className="ghost"
               disabled={!ready || busy}
               onClick={() => onRun("open")}
             >
-              run
+              ▷ Запустить код
             </button>
           </div>
-          <pre className="out">
-            {tele || log}
-            {busy ? <span className="cursor" /> : null}
-          </pre>
-        </div>
+        </section>
       </div>
-      <p className="mute" style={{ marginTop: 16, fontSize: 11 }}>
-        слоты {keys.length}
-      </p>
     </div>
   );
 }
