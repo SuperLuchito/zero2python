@@ -1,64 +1,20 @@
 "use client";
-
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { lessonById, lessons, modules } from "@/content/curriculum";
-import { getProgress, lessonStatus } from "@/lib/storage";
-import type { Progress } from "@/lib/storage";
-
-const LABEL: Record<string, string> = {
-  empty: "—",
-  partial: "в работе",
-  hinted: "подсказка",
-  done: "закрыт",
-};
-
-export function Roadmap() {
+import { lessonById, lessons, modules, allTaskKeys } from "@/content/curriculum";
+import { counts, getProgress, lessonStatus, type Progress } from "@/lib/storage";
+import { CourseArt } from "./CourseArt";
+const titles = ["Python: понимать код", "Данные: находить смысл", "Алгоритмы: мыслить точно"];
+const descriptions = ["Разберитесь, как работают объекты, функции и коллекции. Проверяйте каждую идею в редакторе.", "Исследуйте таблицы, объединяйте данные и замечайте то, что скрывается за числами.", "Учитесь видеть границы задачи, выбирать подход и проверять свои предположения."];
+export function Roadmap({ moduleId }: { moduleId?: string }) {
   const [p, setP] = useState<Progress>({ tasks: {}, qotd: {} });
-  useEffect(() => setP(getProgress()), []);
-
-  return (
-    <div className="shell roadmap-shell">
-      <header className="roadmap-intro">
-        <div><p className="eyebrow">ВАША ЛАБОРАТОРИЯ ЗНАНИЙ</p><h1>От любопытства<br />к <em>первой программе.</em></h1>
-        <p className="dim prose">Одна тема, небольшой эксперимент, новый навык.<br />Выберите урок и попробуйте идею в коде.</p></div>
-        <div className="roadmap-art" aria-hidden="true"><span className="art-star">✳</span><span className="art-code">[ идея ]<br /><b>↓</b><br />{"{ код }"}</span><span className="art-dot" /></div>
-      </header>
-      <div className="modules" style={{ marginTop: 24 }}>
-        {modules.map((m, index) => (
-          <section key={m.id} className="frame module" data-tone={index % 3}>
-            <header>
-              <span className="module-title"><b className="module-number">0{index + 1}</b>{m.title}</span>
-              <span className="dim">{m.blurb}</span>
-            </header>
-            {m.lessonIds.map((id) => {
-              const l = lessonById[id];
-              const st = lessonStatus(
-                l.id,
-                l.tasks.map((t) => t.id),
-                p.tasks,
-              );
-              return (
-                <Link key={id} href={`/app/lesson/${id}`} className="lesson-row">
-                  <span className="mute">{l.minutes} мин</span>
-                  <span>
-                    {l.title}
-                    {l.needsPandas ? (
-                      <span className="dim"> · pandas</span>
-                    ) : null}
-                  </span>
-                  <span className={`status ${st === "done" ? "ok" : "dim"}`}>
-                    {LABEL[st]}
-                  </span>
-                </Link>
-              );
-            })}
-          </section>
-        ))}
-      </div>
-      <p className="mute" style={{ marginTop: 28, fontSize: 12 }}>
-        уроков {lessons.length} · задач {lessons.reduce((n, l) => n + l.tasks.length, 0)}
-      </p>
-    </div>
-  );
+  useEffect(() => { const sync = () => setP(getProgress()); sync(); window.addEventListener("focus",sync); window.addEventListener("py-term-progress",sync); return () => { window.removeEventListener("focus",sync); window.removeEventListener("py-term-progress",sync); }; }, []);
+  const status = (id:string) => lessonStatus(id, lessonById[id].tasks.map(t=>t.id), p.tasks);
+  const completed = counts(p.tasks, allTaskKeys());
+  const current = lessons.find(l=>status(l.id)!=="done") ?? lessons[0];
+  const index = modules.findIndex(m=>m.id===moduleId);
+  if (index >= 0) { const m=modules[index]; return <main className="learning-home module-detail"><Link className="back-link" href="/app">← Моё обучение</Link><header className="module-overview" data-color={index}><div><p className="eyebrow">МОДУЛЬ 0{index+1} / PYTHON</p><h1>{titles[index]}</h1><p>{descriptions[index]}</p><span>{m.lessonIds.length} темы · {m.lessonIds.reduce((n,id)=>n+lessonById[id].minutes,0)} минут практики и теории</span></div><CourseArt index={index}/></header><div className="section-caption"><h2>Темы модуля</h2><span>Теория → практика → разбор</span></div><div className="topic-list">{m.lessonIds.map((id,i)=><Link className="topic-link" key={id} href={`/app/lesson/${id}`}><span className="topic-index">{String(i+1).padStart(2,"0")}</span><div><h3>{lessonById[id].title}</h3><p>{lessonById[id].minutes} мин · {lessonById[id].tasks.length} задания</p></div><span className="topic-state">{status(id)==="done" ? "✓ Пройдено" : status(id)==="empty" ? "Начать" : "Продолжить"} ↗</span></Link>)}</div></main>; }
+  return <main className="learning-home"><div className="learning-heading"><div><p className="eyebrow">ВАШЕ ПРОСТРАНСТВО ДЛЯ ОТКРЫТИЙ</p><h1>Моё обучение<span className="heading-spark" aria-hidden="true">✳</span></h1></div><Link href="/app/qotd" className="daily-shortcut">✳ Разминка для ума <span>Вопрос дня ↗</span></Link></div>
+    <section className="learning-banner"><div><span className="course-pill">PYTHON / ПРАКТИЧЕСКИЙ КУРС</span><h2>Не просто читать код.<br /><em>Понимать, что за ним.</em></h2><p>От объектов и функций — к данным и алгоритмам.<br />Теория, эксперименты и маленькие победы на каждом шаге.</p><Link className="welcome-start" href={`/app/lesson/${current.id}`}>{completed.done ? "Продолжить обучение" : "Начать первый урок"} ↗</Link></div><div className="banner-progress"><div className="progress-orbit" style={{background:`conic-gradient(#a9ecd2 ${completed.done / completed.total * 360}deg, #ffffff12 0deg)`}}><div><strong>{completed.done}<small>/{completed.total}</small></strong><span>задач решено</span></div></div><span>Каждая попытка — шаг вперёд</span></div></section>
+    <div className="section-caption"><h2>Ваша программа</h2><span>{modules.length} модуля · {lessons.length} тем · в вашем темпе</span></div><div className="course-grid">{modules.map((m,i)=>{const done=m.lessonIds.filter(id=>status(id)==="done").length;return <Link className="course-card" data-color={i} href={`/app/module/${m.id}`} key={m.id}><div className="course-cover"><span>МОДУЛЬ 0{i+1}</span><CourseArt index={i}/><b aria-hidden="true">↗</b></div><div className="course-card-body"><h3>{titles[i]}</h3><p>{descriptions[i]}</p><div className="course-card-meta"><span>{m.lessonIds.length} темы</span><span>{done}/{m.lessonIds.length} пройдено</span></div><div className="course-meter"><i style={{width:`${done/m.lessonIds.length*100}%`}}/></div></div></Link>})}</div></main>;
 }

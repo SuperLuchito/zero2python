@@ -35,7 +35,7 @@ export function ProgressStrip() {
   return (
     <nav className="strip" aria-label="Главная навигация">
       <Link className="brand" href="/" aria-label="zero2python — главная"><b aria-hidden="true">z<span>2</span></b><strong>zero2python</strong></Link>
-      <Link href="/app" aria-current={pathname === "/app" || pathname.startsWith("/app/lesson") ? "page" : undefined}><i aria-hidden="true">◇</i> Карта</Link>
+      <Link href="/app" aria-current={pathname === "/app" || pathname.startsWith("/app/lesson") || pathname.startsWith("/app/module") ? "page" : undefined}><i aria-hidden="true">◇</i> Моё обучение</Link>
       <Link href="/app/qotd" aria-current={pathname === "/app/qotd" ? "page" : undefined}><i aria-hidden="true">✳</i> Вопрос дня</Link>
       <span className="grow dim">
         задачи {done}/{total}

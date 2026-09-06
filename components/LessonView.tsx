@@ -13,6 +13,7 @@ function ping() {
 
 export function LessonView({ lesson }: { lesson: Lesson }) {
   const [idx, setIdx] = useState(0);
+  const [stage, setStage] = useState<"theory" | "practice">("theory");
   const task = lesson.tasks[idx];
   const [code, setCode] = useState(task.starter);
   const [log, setLog] = useState("idle.");
@@ -114,7 +115,7 @@ export function LessonView({ lesson }: { lesson: Lesson }) {
 
   return (
     <div className="shell lesson-shell">
-      <p><Link href="/app">← Карта обучения</Link></p>
+      <p><Link href={`/app/module/${lesson.module}`}>← Темы модуля</Link></p>
       <div className="split">
       <section className="material-pane">
       <div className="pane-h material-heading"><strong><i aria-hidden="true">◈</i> Теория и практика</strong> <span>Python / {idx + 1} из {keys.length}</span></div>
@@ -124,11 +125,14 @@ export function LessonView({ lesson }: { lesson: Lesson }) {
         {lesson.needsPandas ? " · pandas" : ""}
       </p>
       <h1>{lesson.title}</h1>
-      <div className="prose">
+      <div className="lesson-stages"><button className={stage === "theory" ? "selected" : ""} aria-pressed={stage === "theory"} onClick={() => setStage("theory")}>01 Теория</button><button className={stage === "practice" ? "selected" : ""} aria-pressed={stage === "practice"} onClick={() => setStage("practice")}>02 Практика</button></div>
+      <div className="prose" hidden={stage !== "theory"}>
         {lesson.body.map((p) => (
           <p key={p}>{p}</p>
         ))}
       </div>
+      {stage === "theory" && <button className="theory-next" onClick={() => setStage("practice")}>Перейти к заданиям →</button>}
+      <div hidden={stage !== "practice"}>
       <div className="tasks">
         {lesson.tasks.map((t, i) => (
           <button
@@ -175,7 +179,7 @@ export function LessonView({ lesson }: { lesson: Lesson }) {
             </div>
           </div>
         </div>
-      </div></section>
+      </div></div></section>
         <section className={`pane editor-pane ${busy ? "running" : ""}`} aria-label="Редактор Python">
           <div className="pane-h">
             <label htmlFor="python-editor">practice.py</label>
