@@ -23,9 +23,13 @@ export function LessonView({ lesson }: { lesson: Lesson }) {
   const [showDebrief, setShowDebrief] = useState(false);
   const [mark, setMark] = useState<TaskMark>("untouched");
   const [tele, setTele] = useState("");
+  const editorRef = useRef<HTMLTextAreaElement>(null);
   const highlightRef = useRef<HTMLPreElement>(null);
   const gutterRef = useRef<HTMLDivElement>(null);
   const [runNumber, setRunNumber] = useState(0);
+  const [runCycle,setRunCycle] = useState(0);
+  const [activeTop,setActiveTop] = useState(22);
+  function updateLine(el: HTMLTextAreaElement) { const style=getComputedStyle(el); const line=el.value.slice(0,el.selectionStart).split("\n").length-1; setActiveTop(parseFloat(style.paddingTop)+line*parseFloat(style.lineHeight)-el.scrollTop); }
 
   const keys = useMemo(
     () => lesson.tasks.map((t) => taskKey(lesson.id, t.id)),
@@ -39,6 +43,8 @@ export function LessonView({ lesson }: { lesson: Lesson }) {
 
   useEffect(() => {
     setCode(task.starter);
+    setActiveTop(22);
+    for (const el of [editorRef.current, highlightRef.current, gutterRef.current]) { if (el) { el.scrollTop = 0; el.scrollLeft = 0; } }
     setLog("idle.");
     setTele("");
     const p = getProgress();
@@ -69,6 +75,7 @@ export function LessonView({ lesson }: { lesson: Lesson }) {
   async function onRun(kind: "tests" | "open") {
     if (!ready || busy) return;
     setBusy(true);
+    setRunCycle(n=>n+1);
     setTele("");
     setLog("Выполняется…");
     try {
@@ -181,6 +188,7 @@ export function LessonView({ lesson }: { lesson: Lesson }) {
         </div>
       </div></div></section>
         <section className={`pane editor-pane ${busy ? "running" : ""}`} aria-label="Редактор Python">
+          {runCycle > 0 && <div key={runCycle} className="run-wave" aria-hidden="true"/>}
           <div className="pane-h">
             <label htmlFor="python-editor">practice.py</label>
             <span className="runtime-state"><i className="runtime-dot" />{busy ? "Выполняется" : ready ? "Python готов" : "Загрузка Python"}</span>
@@ -188,12 +196,15 @@ export function LessonView({ lesson }: { lesson: Lesson }) {
           <div className="editor-wrap">
           <div ref={gutterRef} className="editor-gutter" aria-hidden="true">{code.split("\n").map((_, i) => i + 1).join("\n")}</div>
           <div className="editor-stack">
+          <div className="active-editor-line" aria-hidden="true" style={{top:activeTop}}/>
           <pre ref={highlightRef} className="editor-highlight" aria-hidden="true"><code dangerouslySetInnerHTML={{ __html: highlightPython(code) + (code.endsWith("\n") ? "\n" : "") }} /></pre>
           <textarea
+            ref={editorRef}
             id="python-editor"
             aria-describedby="editor-help"
             disabled={busy}
-            onScroll={e => { if (highlightRef.current) { highlightRef.current.scrollTop = e.currentTarget.scrollTop; highlightRef.current.scrollLeft = e.currentTarget.scrollLeft; } if (gutterRef.current) gutterRef.current.scrollTop = e.currentTarget.scrollTop; }}
+            onSelect={e=>updateLine(e.currentTarget)}
+            onScroll={e => { updateLine(e.currentTarget); if (highlightRef.current) { highlightRef.current.scrollTop = e.currentTarget.scrollTop; highlightRef.current.scrollLeft = e.currentTarget.scrollLeft; } if (gutterRef.current) gutterRef.current.scrollTop = e.currentTarget.scrollTop; }}
             className="editor"
             value={code}
             spellCheck={false}
@@ -211,11 +222,11 @@ export function LessonView({ lesson }: { lesson: Lesson }) {
                 });
               }
             }}
-            onChange={(e) => setCode(e.target.value)}
+            onChange={(e) => { setCode(e.target.value); updateLine(e.currentTarget); }}
           />
           </div></div>
           <p id="editor-help" className="editor-help dim">Tab — отступ · Shift+Tab или Esc — выйти из редактора</p>
-          <div className="pane-h result-heading"><span><i aria-hidden="true">↳</i> Результат</span><span className="result-caption">Ваша идея в действии</span></div>
+          <div className="pane-h result-heading"><span><i aria-hidden="true">↳</i> Результат</span><span className="result-caption">Python stdout</span></div>
           <pre key={runNumber} className="out" role="status">{tele || log}</pre>
           <div className="row actions-bar">
             <button id="lesson-check" disabled={!ready || busy} onClick={() => onRun("tests")}>
