@@ -1,0 +1,11 @@
+'use client';
+import {useEffect,useState} from 'react';
+import {api,flushProgress,signOut} from '@/lib/account';
+type Member={name:string;solved:number;materials:number;leetcode:number;read:number;rank:number;updatedAt:string|null};
+export function Leaderboard(){
+ const [data,setData]=useState<{profile:string;members:Member[];total:number}|null>(null),[error,setError]=useState(''),[busy,setBusy]=useState(false);
+ async function refresh(){setBusy(true);try{await flushProgress();setData(await api('leaderboard'));setError('');}catch(e){setError((e as Error).message);}finally{setBusy(false);}}
+ useEffect(()=>{void refresh();const t=setInterval(refresh,30000);return()=>clearInterval(t);},[]);
+ const me=data?.members.find(m=>m.name===data.profile);
+ return <main className="learning-home team-page"><div className="learning-heading"><div><p className="eyebrow">КОМАНДА / ПРОГРЕСС</p><h1>Лидерборд</h1></div><button disabled={busy} onClick={refresh}>{busy?'Обновляем…':'Обновить'}</button></div>{error&&<p role="alert" className="upload-error">{error}</p>}{me&&<section className="profile-summary"><span className="profile-avatar">{me.name[0]}</span><div><p>Ваш профиль</p><h2>{me.name}</h2></div><div><strong>{me.solved}<small> / {data!.total}</small></strong><p>задач Python решено</p></div><button onClick={async()=>{try{await signOut();location.assign('/');}catch(e){setError((e as Error).message);}}}>Сменить профиль</button></section>}<p>Место зависит от решённых задач Python. Подсказки допустимы. При равном количестве решений участники делят место. Просмотры, книга и LeetCode показаны отдельно.</p><div className="leaderboard-table">{data?.members.map(m=><article key={m.name} className={m.name===data.profile?'is-me':''}><b className="rank">{m.rank}</b><div><h2>{m.name}{m.name===data.profile&&<small>вы</small>}</h2><p>{m.updatedAt?`Обновлено ${new Date(m.updatedAt).toLocaleString('ru-RU')}`:'Ещё нет результатов'}</p></div><div className="team-score"><strong>{m.solved}/{data.total}</strong><span>Python</span><progress value={m.solved} max={data.total}/></div><dl><div><dt>Материалы</dt><dd>{m.materials}</dd></div><div><dt>LeetCode</dt><dd>{m.leetcode}</dd></div><div><dt>Глав прочитано</dt><dd>{m.read}/16</dd></div></dl></article>)}</div>{!data&&!error&&<p role="status">Загружаем результаты команды…</p>}</main>;
+}

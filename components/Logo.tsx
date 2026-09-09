@@ -1,1 +1,1 @@
-export function Logo() { return <span className="z2p-logo" aria-label="Zero to Python">Z<sub>2</sub>P</span>; }
+export function Logo() { return <span className="z2p-logo" aria-label="Zero to Python"><svg viewBox="0 0 28 28" aria-hidden="true"><rect x="1.5" y="1.5" width="25" height="25" rx="6"/><path d="m7 9 5 5-5 5m8 0h6"/></svg><span>Zero <em>to</em> Python</span></span>; }

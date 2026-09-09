@@ -1,3 +1,4 @@
+import {profileKey,queueProgress} from './account';
 import type { TaskMark } from "./types";
 
 const KEY = "py-term.v1";
@@ -12,7 +13,7 @@ const empty = (): Progress => ({ tasks: {}, qotd: {} });
 function read(): Progress {
   if (typeof window === "undefined") return empty();
   try {
-    const raw = localStorage.getItem(KEY);
+    const raw = localStorage.getItem(profileKey(KEY));
     if (!raw) return empty();
     const parsed = JSON.parse(raw) as Progress;
     return {
@@ -25,7 +26,7 @@ function read(): Progress {
 }
 
 function write(p: Progress) {
-  localStorage.setItem(KEY, JSON.stringify(p));
+  localStorage.setItem(profileKey(KEY), JSON.stringify(p));
 }
 
 export function taskKey(lessonId: string, taskId: string) {
@@ -42,6 +43,7 @@ export function markTask(lessonId: string, taskId: string, mark: TaskMark) {
   const prev = p.tasks[k] ?? "untouched";
   p.tasks[k] = combine(prev, mark);
   write(p);
+  queueProgress({kind:'tasks',key:k,value:p.tasks[k]});
   return p;
 }
 
@@ -66,6 +68,7 @@ export function markQotd(day: string, qid: string, ok: boolean) {
   const p = read();
   if (!p.qotd[day]) p.qotd[day] = { qid, ok };
   write(p);
+  queueProgress({kind:'qotd',key:day,value:p.qotd[day]});
   return p;
 }
 

@@ -27,3 +27,6 @@ coverage/
 # Исходные учебные материалы и личные данные
 /materials/private/
 /data/private/
+
+/dist/
+/.wrangler/

@@ -1,0 +1,1946 @@
+{
+  "L01": {
+    "resources": [
+      {
+        "id": "ivan-01",
+        "title": "Урок 1. Что такое Python?",
+        "url": "https://www.youtube.com/watch?v=xnL7WVw2e1A&list=PLs2IpQwiXpT1Dusi6jbWTfS7xBGyZK9Ox&index=1",
+        "kind": "video",
+        "author": "Иван Викторович",
+        "description": "Курс «Python для начинающих» · 16 мин.",
+        "focus": "Разберитесь, что делает интерпретатор и как запускается программа.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "xnL7WVw2e1A",
+        "note": "Основной плейлист курса. Нумерация видео сохранена; здесь они сгруппированы по темам."
+      },
+      {
+        "id": "ivan-02",
+        "title": "Урок 2. Установка Python и PyCharm",
+        "url": "https://www.youtube.com/watch?v=q5h7mBXRO6I&list=PLs2IpQwiXpT1Dusi6jbWTfS7xBGyZK9Ox&index=2",
+        "kind": "video",
+        "author": "Иван Викторович",
+        "description": "Курс «Python для начинающих» · 30 мин.",
+        "focus": "Если занимаетесь только здесь, установка не нужна: Python уже есть в браузере. Видео пригодится для локальных проектов.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "q5h7mBXRO6I",
+        "note": "Основной плейлист курса. Нумерация видео сохранена; здесь они сгруппированы по темам."
+      },
+      {
+        "id": "ivan-03",
+        "title": "Урок 3. Переменные. Типы данных",
+        "url": "https://www.youtube.com/watch?v=zQTHep9PfUM&list=PLs2IpQwiXpT1Dusi6jbWTfS7xBGyZK9Ox&index=3",
+        "kind": "video",
+        "author": "Иван Викторович",
+        "description": "Курс «Python для начинающих» · 13:20.",
+        "focus": "Проследите изменение значения переменной после каждого присваивания.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "zQTHep9PfUM",
+        "note": "Основной плейлист курса. Нумерация видео сохранена; здесь они сгруппированы по темам."
+      }
+    ],
+    "challenges": [
+      {
+        "id": "add-two-integers",
+        "title": "2235 · Сумма двух чисел",
+        "url": "https://leetcode.com/problems/add-two-integers/",
+        "difficulty": "Easy",
+        "description": "Верните сумму двух целых чисел. Не печатайте результат: проверяющая система ожидает возвращаемое значение.",
+        "prerequisites": "арифметика; после знакомства с return в L05"
+      },
+      {
+        "id": "number-of-steps-to-reduce-a-number-to-zero",
+        "title": "1342 · Свести число к нулю",
+        "url": "https://leetcode.com/problems/number-of-steps-to-reduce-a-number-to-zero/",
+        "difficulty": "Easy",
+        "description": "Посчитайте операции: чётное число делится на два, нечётное уменьшается на один. Закончите, когда получите ноль.",
+        "prerequisites": "return из L05, условия и while из L10; вернитесь к задаче после этих тем"
+      },
+      {
+        "id": "reverse-integer",
+        "title": "7 · Цифры в обратном порядке",
+        "url": "https://leetcode.com/problems/reverse-integer/",
+        "difficulty": "Medium",
+        "description": "Разверните десятичные цифры целого числа, сохранив знак. Если результат выходит за диапазон от −2³¹ до 2³¹−1, верните 0. По условию нельзя хранить промежуточное число за пределами 32 бит.",
+        "prerequisites": "Целочисленное деление, остаток, условия и цикл. В первых темах это задача на вырост: вернитесь после L06.",
+        "example": "x = -120 → -21"
+      }
+    ],
+    "title": "Переменные и порядок выполнения"
+  },
+  "L02": {
+    "resources": [
+      {
+        "id": "ivan-04",
+        "title": "Урок 4. Переменные. Типы данных — продолжение",
+        "url": "https://www.youtube.com/watch?v=H81Osr7YO8w&list=PLs2IpQwiXpT1Dusi6jbWTfS7xBGyZK9Ox&index=4",
+        "kind": "video",
+        "author": "Иван Викторович",
+        "description": "Курс «Python для начинающих» · 24 мин.",
+        "focus": "Сравните результаты операций над числами и строками. Повторите преобразование типов.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "H81Osr7YO8w",
+        "note": "Основной плейлист курса. Нумерация видео сохранена; здесь они сгруппированы по темам."
+      }
+    ],
+    "challenges": [
+      {
+        "id": "number-of-steps-to-reduce-a-number-to-zero",
+        "title": "1342 · Свести число к нулю",
+        "url": "https://leetcode.com/problems/number-of-steps-to-reduce-a-number-to-zero/",
+        "difficulty": "Easy",
+        "description": "Посчитайте операции: чётное число делится на два, нечётное уменьшается на один. Закончите, когда получите ноль.",
+        "prerequisites": "остаток от деления, условия и while (L10)"
+      },
+      {
+        "id": "single",
+        "title": "136 · Число без пары",
+        "url": "https://leetcode.com/problems/single-number/",
+        "difficulty": "Easy",
+        "description": "В непустом списке каждое число встречается дважды, кроме одного. Найдите его за O(n), используя O(1) дополнительной памяти.",
+        "prerequisites": "побитовый XOR; это дополнительная тема, её нет в основном плейлисте",
+        "example": "[8, 3, 8] → 3"
+      },
+      {
+        "id": "reverse-integer",
+        "title": "7 · Цифры в обратном порядке",
+        "url": "https://leetcode.com/problems/reverse-integer/",
+        "difficulty": "Medium",
+        "description": "Разверните десятичные цифры целого числа, сохранив знак. Если результат выходит за диапазон от −2³¹ до 2³¹−1, верните 0. По условию нельзя хранить промежуточное число за пределами 32 бит.",
+        "prerequisites": "Целочисленное деление, остаток, условия и цикл. В первых темах это задача на вырост: вернитесь после L06.",
+        "example": "x = -120 → -21"
+      }
+    ],
+    "title": "Числа, деление и округление"
+  },
+  "L03": {
+    "resources": [
+      {
+        "id": "ivan-09",
+        "title": "Урок 9. Работа со строками",
+        "url": "https://www.youtube.com/watch?v=pO87qF8Kz8g&list=PLs2IpQwiXpT1Dusi6jbWTfS7xBGyZK9Ox&index=9",
+        "kind": "video",
+        "author": "Иван Викторович",
+        "description": "Курс «Python для начинающих» · 15 мин.",
+        "focus": "Попробуйте индексы и срезы на короткой строке; проверьте пустой результат.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "pO87qF8Kz8g",
+        "note": "Основной плейлист курса. Нумерация видео сохранена; здесь они сгруппированы по темам."
+      }
+    ],
+    "challenges": [
+      {
+        "id": "defanging-an-ip-address",
+        "title": "1108 · Безопасная запись IP",
+        "url": "https://leetcode.com/problems/defanging-an-ip-address/",
+        "difficulty": "Easy",
+        "description": "В корректном IPv4-адресе замените каждую точку на [.] и верните новую строку.",
+        "prerequisites": "методы строк, return"
+      },
+      {
+        "id": "last-word",
+        "title": "58 · Длина последнего слова",
+        "url": "https://leetcode.com/problems/length-of-last-word/",
+        "difficulty": "Easy",
+        "description": "Верните длину последнего слова. По краям и между словами могут быть пробелы. В строке гарантированно есть хотя бы одно слово.",
+        "prerequisites": "методы строк и return из L05",
+        "example": "\"  hello cat  \" → 3"
+      },
+      {
+        "id": "string-to-integer-atoi",
+        "title": "8 · Число из начала строки",
+        "url": "https://leetcode.com/problems/string-to-integer-atoi/",
+        "difficulty": "Medium",
+        "description": "Пропустите начальные пробелы, прочитайте необязательный знак и следующие цифры до первого другого символа. Если цифр нет, верните 0. Ограничьте результат диапазоном 32-битного целого.",
+        "prerequisites": "Строки, условия, цикл; понадобится после L06. Полные правила пробелов и границ — в условии LeetCode.",
+        "example": "s = \"  -27tail\" → -27"
+      }
+    ],
+    "title": "Строки и преобразования"
+  },
+  "L04": {
+    "resources": [
+      {
+        "id": "ivan-05",
+        "title": "Урок 5. Условные конструкции",
+        "url": "https://www.youtube.com/watch?v=wGq6i8ZiS_c&list=PLs2IpQwiXpT1Dusi6jbWTfS7xBGyZK9Ox&index=5",
+        "kind": "video",
+        "author": "Иван Викторович",
+        "description": "Курс «Python для начинающих» · 12:51.",
+        "focus": "Проверьте, какая ветка выполняется при истинном и ложном условии.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "wGq6i8ZiS_c",
+        "note": "Основной плейлист курса. Нумерация видео сохранена; здесь они сгруппированы по темам."
+      }
+    ],
+    "challenges": [
+      {
+        "id": "fizz-buzz",
+        "title": "412 · Fizz Buzz",
+        "url": "https://leetcode.com/problems/fizz-buzz/",
+        "difficulty": "Easy",
+        "description": "Для чисел от 1 до n сформируйте строки: кратные 3 — Fizz, кратные 5 — Buzz, кратные обоим — FizzBuzz, остальные — само число.",
+        "prerequisites": "условия, цикл и накопление списка (L06, L11)"
+      },
+      {
+        "id": "power-two",
+        "title": "231 · Степень двойки",
+        "url": "https://leetcode.com/problems/power-of-two/",
+        "difficulty": "Easy",
+        "description": "Верните True, если целое n равно 2 в неотрицательной целой степени. Для нуля и отрицательных чисел ответ False; для 1 — True.",
+        "prerequisites": "условия, while; решайте после L10",
+        "example": "n=8 → True; n=12 → False"
+      },
+      {
+        "id": "merge-intervals",
+        "title": "56 · Объединение интервалов",
+        "url": "https://leetcode.com/problems/merge-intervals/",
+        "difficulty": "Medium",
+        "description": "Объедините пересекающиеся интервалы. Соприкасающиеся границы тоже объединяются: интервалы здесь замкнутые. Результат должен покрывать те же точки без перекрытий.",
+        "prerequisites": "Списки, сортировка по началу интервала и проход по соседям.",
+        "example": "[[1, 4], [4, 6], [9, 10]] → [[1, 6], [9, 10]]"
+      }
+    ],
+    "title": "Условия и логические выражения"
+  },
+  "L05": {
+    "resources": [
+      {
+        "id": "ivan-17",
+        "title": "Урок 17. Функции",
+        "url": "https://www.youtube.com/watch?v=nEeQZulWZUQ&list=PLs2IpQwiXpT1Dusi6jbWTfS7xBGyZK9Ox&index=17",
+        "kind": "video",
+        "author": "Иван Викторович",
+        "description": "Курс «Python для начинающих» · 19 мин.",
+        "focus": "Отделите параметры функции от аргументов вызова и return от print.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "nEeQZulWZUQ",
+        "note": "Основной плейлист курса. Нумерация видео сохранена; здесь они сгруппированы по темам."
+      }
+    ],
+    "challenges": [
+      {
+        "id": "add-two-integers",
+        "title": "2235 · Сумма двух чисел",
+        "url": "https://leetcode.com/problems/add-two-integers/",
+        "difficulty": "Easy",
+        "description": "Верните сумму двух целых чисел. Не печатайте результат: проверяющая система ожидает возвращаемое значение.",
+        "prerequisites": "арифметика; после знакомства с return в L05"
+      },
+      {
+        "id": "last-word",
+        "title": "58 · Длина последнего слова",
+        "url": "https://leetcode.com/problems/length-of-last-word/",
+        "difficulty": "Easy",
+        "description": "Верните длину последнего слова. По краям и между словами могут быть пробелы. В строке гарантированно есть хотя бы одно слово.",
+        "prerequisites": "методы строк и return из L05",
+        "example": "\"  hello cat  \" → 3"
+      },
+      {
+        "id": "powx-n",
+        "title": "50 · Быстрое возведение в степень",
+        "url": "https://leetcode.com/problems/powx-n/",
+        "difficulty": "Medium",
+        "description": "Вычислите x в целой степени n. Учтите нулевую и отрицательную степени. Большие n требуют способа быстрее, чем n последовательных умножений.",
+        "prerequisites": "Арифметика, циклы; идея двоичного возведения в степень.",
+        "example": "x = 2, n = -3 → 0.125"
+      }
+    ],
+    "title": "Функции и возвращаемые значения"
+  },
+  "L06": {
+    "resources": [
+      {
+        "id": "ivan-08",
+        "title": "Урок 8. Цикл for",
+        "url": "https://www.youtube.com/watch?v=g0DLCb-6qvE&list=PLs2IpQwiXpT1Dusi6jbWTfS7xBGyZK9Ox&index=8",
+        "kind": "video",
+        "author": "Иван Викторович",
+        "description": "Курс «Python для начинающих» · 21 мин.",
+        "focus": "Проследите значения переменной цикла и накопленного результата.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "g0DLCb-6qvE",
+        "note": "Основной плейлист курса. Нумерация видео сохранена; здесь они сгруппированы по темам."
+      }
+    ],
+    "challenges": [
+      {
+        "id": "running-sum-of-1d-array",
+        "title": "1480 · Накопленные суммы",
+        "url": "https://leetcode.com/problems/running-sum-of-1d-array/",
+        "difficulty": "Easy",
+        "description": "Постройте массив, где на позиции i стоит сумма исходных элементов от начала до i включительно.",
+        "prerequisites": "цикл, список и накопитель"
+      },
+      {
+        "id": "merge-strings",
+        "title": "1768 · Чередование двух строк",
+        "url": "https://leetcode.com/problems/merge-strings-alternately/",
+        "difficulty": "Easy",
+        "description": "Соберите строку, по очереди беря символ из word1 и word2. Начните с word1; остаток более длинной строки добавьте в конец.",
+        "prerequisites": "цикл, индексы и строки",
+        "example": "word1=\"ab\", word2=\"xyz\" → \"axbyz\""
+      },
+      {
+        "id": "longest-substring-without-repeating-characters",
+        "title": "3 · Участок строки без повторов",
+        "url": "https://leetcode.com/problems/longest-substring-without-repeating-characters/",
+        "difficulty": "Medium",
+        "description": "Найдите длину самого длинного непрерывного фрагмента строки, в котором ни один символ не повторяется. Пропускать символы внутри фрагмента нельзя.",
+        "prerequisites": "Строки, множество или словарь. Эффективное решение использует скользящее окно из L21.",
+        "example": "s = \"abca\" → 3"
+      }
+    ],
+    "title": "Циклы и накопление результата"
+  },
+  "L07": {
+    "resources": [
+      {
+        "id": "ivan-10",
+        "title": "Урок 10. Работа со строками — продолжение",
+        "url": "https://www.youtube.com/watch?v=FEZ20iMtTCk&list=PLs2IpQwiXpT1Dusi6jbWTfS7xBGyZK9Ox&index=10",
+        "kind": "video",
+        "author": "Иван Викторович",
+        "description": "Курс «Python для начинающих» · 22 мин.",
+        "focus": "Сравните исходную строку и результат метода: строки не меняются на месте.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "FEZ20iMtTCk",
+        "note": "Основной плейлист курса. Нумерация видео сохранена; здесь они сгруппированы по темам."
+      }
+    ],
+    "challenges": [
+      {
+        "id": "palindrome-number",
+        "title": "9 · Число-палиндром",
+        "url": "https://leetcode.com/problems/palindrome-number/",
+        "difficulty": "Easy",
+        "description": "Определите, одинаково ли целое число читается слева направо и справа налево. Отрицательные числа палиндромами не считаются.",
+        "prerequisites": "строки, срезы, сравнение"
+      },
+      {
+        "id": "word-count",
+        "title": "2114 · Самое длинное предложение",
+        "url": "https://leetcode.com/problems/maximum-number-of-words-found-in-sentences/",
+        "difficulty": "Easy",
+        "description": "Дан список предложений. Верните максимальное количество слов в одном предложении. Слова разделены одиночными пробелами, пробелов по краям нет.",
+        "prerequisites": "строки, цикл и списки из L11",
+        "example": "[\"one two\", \"a b c\"] → 3"
+      },
+      {
+        "id": "string-to-integer-atoi",
+        "title": "8 · Число из начала строки",
+        "url": "https://leetcode.com/problems/string-to-integer-atoi/",
+        "difficulty": "Medium",
+        "description": "Пропустите начальные пробелы, прочитайте необязательный знак и следующие цифры до первого другого символа. Если цифр нет, верните 0. Ограничьте результат диапазоном 32-битного целого.",
+        "prerequisites": "Строки, условия, цикл; понадобится после L06. Полные правила пробелов и границ — в условии LeetCode.",
+        "example": "s = \"  -27tail\" → -27"
+      }
+    ]
+  },
+  "L08": {
+    "resources": [
+      {
+        "id": "ivan-06",
+        "title": "Урок 6. Условные конструкции — продолжение",
+        "url": "https://www.youtube.com/watch?v=1Mnv4PxA53w&list=PLs2IpQwiXpT1Dusi6jbWTfS7xBGyZK9Ox&index=6",
+        "kind": "video",
+        "author": "Иван Викторович",
+        "description": "Курс «Python для начинающих» · 21 мин.",
+        "focus": "Разберите порядок нескольких условий и значения на границах диапазона.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "1Mnv4PxA53w",
+        "note": "Основной плейлист курса. Нумерация видео сохранена; здесь они сгруппированы по темам."
+      }
+    ],
+    "challenges": [
+      {
+        "id": "fizz-buzz",
+        "title": "412 · Fizz Buzz",
+        "url": "https://leetcode.com/problems/fizz-buzz/",
+        "difficulty": "Easy",
+        "description": "Для чисел от 1 до n сформируйте строки: кратные 3 — Fizz, кратные 5 — Buzz, кратные обоим — FizzBuzz, остальные — само число.",
+        "prerequisites": "условия, цикл и накопление списка (L06, L11)"
+      },
+      {
+        "id": "roman",
+        "title": "13 · Римское число в десятичное",
+        "url": "https://leetcode.com/problems/roman-to-integer/",
+        "difficulty": "Easy",
+        "description": "Преобразуйте корректную римскую запись в целое число. Учитывайте пары с вычитанием: IV, IX, XL, XC, CD, CM. Таблица символов дана в условии LeetCode.",
+        "prerequisites": "словарь, цикл и соседние элементы",
+        "example": "\"XIV\" → 14"
+      },
+      {
+        "id": "string-to-integer-atoi",
+        "title": "8 · Число из начала строки",
+        "url": "https://leetcode.com/problems/string-to-integer-atoi/",
+        "difficulty": "Medium",
+        "description": "Пропустите начальные пробелы, прочитайте необязательный знак и следующие цифры до первого другого символа. Если цифр нет, верните 0. Ограничьте результат диапазоном 32-битного целого.",
+        "prerequisites": "Строки, условия, цикл; понадобится после L06. Полные правила пробелов и границ — в условии LeetCode.",
+        "example": "s = \"  -27tail\" → -27"
+      }
+    ]
+  },
+  "L09": {
+    "resources": [
+      {
+        "id": "ivan-18",
+        "title": "Урок 18. Функции — продолжение",
+        "url": "https://www.youtube.com/watch?v=cumhHqGkFXk&list=PLs2IpQwiXpT1Dusi6jbWTfS7xBGyZK9Ox&index=18",
+        "kind": "video",
+        "author": "Иван Викторович",
+        "description": "Курс «Python для начинающих» · 15 мин.",
+        "focus": "Проверьте независимость нескольких вызовов и передачу аргументов.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "cumhHqGkFXk",
+        "note": "Основной плейлист курса. Нумерация видео сохранена; здесь они сгруппированы по темам."
+      }
+    ],
+    "challenges": [
+      {
+        "id": "number-of-good-pairs",
+        "title": "1512 · Одинаковые пары",
+        "url": "https://leetcode.com/problems/number-of-good-pairs/",
+        "difficulty": "Easy",
+        "description": "Посчитайте пары индексов i < j, для которых значения массива равны. Один индекс не образует пару с самим собой.",
+        "prerequisites": "вложенные циклы; словарь для улучшения решения"
+      },
+      {
+        "id": "word-count",
+        "title": "2114 · Самое длинное предложение",
+        "url": "https://leetcode.com/problems/maximum-number-of-words-found-in-sentences/",
+        "difficulty": "Easy",
+        "description": "Дан список предложений. Верните максимальное количество слов в одном предложении. Слова разделены одиночными пробелами, пробелов по краям нет.",
+        "prerequisites": "строки, цикл и списки из L11",
+        "example": "[\"one two\", \"a b c\"] → 3"
+      },
+      {
+        "id": "evaluate-reverse-polish-notation",
+        "title": "150 · Калькулятор со стеком",
+        "url": "https://leetcode.com/problems/evaluate-reverse-polish-notation/",
+        "difficulty": "Medium",
+        "description": "Вычислите выражение, в котором оператор записан после двух операндов. Поддерживаются +, −, *, /. Деление отбрасывает дробную часть в сторону нуля, в том числе для отрицательных чисел.",
+        "prerequisites": "Функции, списки как стек, преобразование строк в числа.",
+        "example": "[\"8\", \"3\", \"-\"] → 5"
+      }
+    ]
+  },
+  "L10": {
+    "resources": [
+      {
+        "id": "ivan-07",
+        "title": "Урок 7. Цикл while",
+        "url": "https://www.youtube.com/watch?v=a5_9_VoCWsE&list=PLs2IpQwiXpT1Dusi6jbWTfS7xBGyZK9Ox&index=7",
+        "kind": "video",
+        "author": "Иван Викторович",
+        "description": "Курс «Python для начинающих» · 16 мин.",
+        "focus": "Для каждого цикла определите начальное состояние, условие продолжения и изменение переменной.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "a5_9_VoCWsE",
+        "note": "Основной плейлист курса. Нумерация видео сохранена; здесь они сгруппированы по темам."
+      }
+    ],
+    "challenges": [
+      {
+        "id": "number-of-steps-to-reduce-a-number-to-zero",
+        "title": "1342 · Свести число к нулю",
+        "url": "https://leetcode.com/problems/number-of-steps-to-reduce-a-number-to-zero/",
+        "difficulty": "Easy",
+        "description": "Посчитайте операции: чётное число делится на два, нечётное уменьшается на один. Закончите, когда получите ноль.",
+        "prerequisites": "остаток от деления, условия и while (L10)"
+      },
+      {
+        "id": "bits",
+        "title": "191 · Единицы в двоичной записи",
+        "url": "https://leetcode.com/problems/number-of-1-bits/",
+        "difficulty": "Easy",
+        "description": "Верните количество единиц в двоичной записи положительного целого числа. Можно начать с деления на 2 и остатка.",
+        "prerequisites": "while, целочисленное деление и остаток",
+        "example": "13 = 0b1101 → 3"
+      },
+      {
+        "id": "reverse-integer",
+        "title": "7 · Цифры в обратном порядке",
+        "url": "https://leetcode.com/problems/reverse-integer/",
+        "difficulty": "Medium",
+        "description": "Разверните десятичные цифры целого числа, сохранив знак. Если результат выходит за диапазон от −2³¹ до 2³¹−1, верните 0. По условию нельзя хранить промежуточное число за пределами 32 бит.",
+        "prerequisites": "Целочисленное деление, остаток, условия и цикл. В первых темах это задача на вырост: вернитесь после L06.",
+        "example": "x = -120 → -21"
+      }
+    ]
+  },
+  "L11": {
+    "resources": [
+      {
+        "id": "ivan-11",
+        "title": "Урок 11. Списки",
+        "url": "https://www.youtube.com/watch?v=AKbaDfbVhTI&list=PLs2IpQwiXpT1Dusi6jbWTfS7xBGyZK9Ox&index=11",
+        "kind": "video",
+        "author": "Иван Викторович",
+        "description": "Курс «Python для начинающих» · 22 мин.",
+        "focus": "Проследите порядок элементов при добавлении и удалении.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "AKbaDfbVhTI",
+        "note": "Основной плейлист курса. Нумерация видео сохранена; здесь они сгруппированы по темам."
+      },
+      {
+        "id": "ivan-12",
+        "title": "Урок 12. Списки — продолжение",
+        "url": "https://www.youtube.com/watch?v=JZd9Ko3QDn8&list=PLs2IpQwiXpT1Dusi6jbWTfS7xBGyZK9Ox&index=12",
+        "kind": "video",
+        "author": "Иван Викторович",
+        "description": "Курс «Python для начинающих» · 20 мин.",
+        "focus": "Проверьте, какие операции меняют исходный список, а какие создают новый.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "JZd9Ko3QDn8",
+        "note": "Основной плейлист курса. Нумерация видео сохранена; здесь они сгруппированы по темам."
+      }
+    ],
+    "challenges": [
+      {
+        "id": "remove-duplicates-from-sorted-array",
+        "title": "26 · Удалить повторы на месте",
+        "url": "https://leetcode.com/problems/remove-duplicates-from-sorted-array/",
+        "difficulty": "Easy",
+        "description": "Сохраните уникальные значения отсортированного списка в его начале и верните их количество. Важно изменить переданный список, а не только вернуть новый.",
+        "prerequisites": "списки, индексы и изменение на месте"
+      },
+      {
+        "id": "wealth",
+        "title": "1672 · Самый большой баланс",
+        "url": "https://leetcode.com/problems/richest-customer-wealth/",
+        "difficulty": "Easy",
+        "description": "Для каждого клиента сложите суммы на его счетах и верните самый большой итог. Строка матрицы — один клиент.",
+        "prerequisites": "списки списков, sum и max",
+        "example": "[[2, 4], [3, 8]] → 11"
+      },
+      {
+        "id": "subarray-sum-equals-k",
+        "title": "560 · Сколько участков дают нужную сумму",
+        "url": "https://leetcode.com/problems/subarray-sum-equals-k/",
+        "difficulty": "Medium",
+        "description": "Посчитайте непустые непрерывные участки массива, сумма которых равна k. Числа могут быть отрицательными; совпавшие участки разных позиций считаются отдельно.",
+        "prerequisites": "Списки, накопленная сумма и словарь частот.",
+        "example": "nums = [1, 2, 1], k = 3 → 2"
+      }
+    ]
+  },
+  "L12": {
+    "resources": [
+      {
+        "id": "ivan-13",
+        "title": "Урок 13. Кортежи",
+        "url": "https://www.youtube.com/watch?v=VvhHbuCgLP4&list=PLs2IpQwiXpT1Dusi6jbWTfS7xBGyZK9Ox&index=13",
+        "kind": "video",
+        "author": "Иван Викторович",
+        "description": "Курс «Python для начинающих» · 20 мин.",
+        "focus": "Сравните кортеж со списком и попробуйте распаковку значений.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "VvhHbuCgLP4",
+        "note": "Основной плейлист курса. Нумерация видео сохранена; здесь они сгруппированы по темам."
+      },
+      {
+        "id": "ivan-14",
+        "title": "Урок 14. Множества",
+        "url": "https://www.youtube.com/watch?v=VzzozsGZ-0E&list=PLs2IpQwiXpT1Dusi6jbWTfS7xBGyZK9Ox&index=14",
+        "kind": "video",
+        "author": "Иван Викторович",
+        "description": "Курс «Python для начинающих» · 22 мин.",
+        "focus": "Проверьте, что происходит с повторами; порядок элементов не используйте как часть результата.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "VzzozsGZ-0E",
+        "note": "Основной плейлист курса. Нумерация видео сохранена; здесь они сгруппированы по темам."
+      },
+      {
+        "id": "ivan-15",
+        "title": "Урок 15. Словари",
+        "url": "https://www.youtube.com/watch?v=tU5ZqrUsy6M&list=PLs2IpQwiXpT1Dusi6jbWTfS7xBGyZK9Ox&index=15",
+        "kind": "video",
+        "author": "Иван Викторович",
+        "description": "Курс «Python для начинающих» · 15 мин.",
+        "focus": "Разделяйте ключ и значение; проверьте обращение к отсутствующему ключу.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "tU5ZqrUsy6M",
+        "note": "Основной плейлист курса. Нумерация видео сохранена; здесь они сгруппированы по темам."
+      },
+      {
+        "id": "ivan-16",
+        "title": "Урок 16. Словари — продолжение",
+        "url": "https://www.youtube.com/watch?v=17QkTTNVWYc&list=PLs2IpQwiXpT1Dusi6jbWTfS7xBGyZK9Ox&index=16",
+        "kind": "video",
+        "author": "Иван Викторович",
+        "description": "Курс «Python для начинающих» · 20 мин.",
+        "focus": "Проследите добавление, изменение и перебор пар ключ–значение.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "17QkTTNVWYc",
+        "note": "Основной плейлист курса. Нумерация видео сохранена; здесь они сгруппированы по темам."
+      },
+      {
+        "id": "b8c2adda5a33",
+        "title": "Словари: создание, ключи и операции",
+        "url": "https://metanit.com/python/tutorial/3.3.php",
+        "kind": "article",
+        "author": "METANIT",
+        "description": "Справочный материал для работы с ключами и значениями. Прочитайте перед видео о методах словаря.",
+        "focus": "Различайте отсутствие ключа и значение None. Словарь сохраняет порядок добавления, множество удаляет повторы и не задаёт порядок результата.",
+        "checkedAt": "07.09.2026"
+      }
+    ],
+    "challenges": [
+      {
+        "id": "intersection-of-two-arrays",
+        "title": "349 · Пересечение массивов",
+        "url": "https://leetcode.com/problems/intersection-of-two-arrays/",
+        "difficulty": "Easy",
+        "description": "Верните общие значения двух массивов без повторов. Порядок значений в результате не важен.",
+        "prerequisites": "множества и пересечение"
+      },
+      {
+        "id": "jewels",
+        "title": "771 · Подсчёт нужных символов",
+        "url": "https://leetcode.com/problems/jewels-and-stones/",
+        "difficulty": "Easy",
+        "description": "В jewels перечислены нужные символы, stones — строка для подсчёта. Верните число символов stones, входящих в jewels. Регистр важен.",
+        "prerequisites": "цикл, проверка in; множества из L12",
+        "example": "jewels=\"aB\", stones=\"aaBc\" → 3"
+      },
+      {
+        "id": "group-anagrams",
+        "title": "49 · Группы анаграмм",
+        "url": "https://leetcode.com/problems/group-anagrams/",
+        "difficulty": "Medium",
+        "description": "Объедините слова в группы: слова одной группы состоят из одинаковых букв с одинаковыми количествами. Порядок групп не важен.",
+        "prerequisites": "Словари, строки и ключ группировки.",
+        "example": "[\"tea\", \"eat\", \"cat\"] → [[\"tea\", \"eat\"], [\"cat\"]]"
+      }
+    ]
+  },
+  "L13": {
+    "resources": [
+      {
+        "id": "7a57c90972ee",
+        "title": "Срезы и копирование списка",
+        "url": "https://www.youtube.com/watch?v=Vx3s01Yb1P8",
+        "kind": "video",
+        "author": "Сергей Балакирев · selfedu",
+        "description": "Получение нового внешнего списка и сравнение последовательностей.",
+        "focus": "Срез не делает глубокую копию: вложенные объекты могут остаться общими.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "Vx3s01Yb1P8",
+        "companionUrl": "https://proproprogs.ru/python_base/python3-srezy-spiskov-i-sravnenie-spiskov"
+      },
+      {
+        "id": "bfa46d9761fb",
+        "title": "Вложенные списки",
+        "url": "https://www.youtube.com/watch?v=FBCufeNGQio",
+        "kind": "video",
+        "author": "Сергей Балакирев · selfedu",
+        "description": "Представление таблиц и матриц через списки списков.",
+        "focus": "Проверьте, не указывают ли две строки матрицы на один и тот же список.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "FBCufeNGQio",
+        "companionUrl": "https://proproprogs.ru/python_base/python3-vlozhennye-spiski-mnogomernye-spiski"
+      }
+    ],
+    "challenges": [
+      {
+        "id": "reshape-the-matrix",
+        "title": "566 · Изменить форму матрицы",
+        "url": "https://leetcode.com/problems/reshape-the-matrix/",
+        "difficulty": "Easy",
+        "description": "Переложите элементы матрицы в r строк и c столбцов, сохраняя порядок обхода по строкам. Если размер несовместим, верните исходную матрицу.",
+        "prerequisites": "списки списков, индексы, форма матрицы"
+      },
+      {
+        "id": "shuffle",
+        "title": "1470 · Чередование половин списка",
+        "url": "https://leetcode.com/problems/shuffle-the-array/",
+        "difficulty": "Easy",
+        "description": "Дан список из двух половин длины n. Соберите новый список, чередуя элементы первой и второй половины.",
+        "prerequisites": "индексы и цикл for",
+        "example": "[1, 2, 7, 8], n=2 → [1, 7, 2, 8]"
+      },
+      {
+        "id": "rotate-image",
+        "title": "48 · Поворот квадратного изображения",
+        "url": "https://leetcode.com/problems/rotate-image/",
+        "difficulty": "Medium",
+        "description": "Поверните квадратную матрицу на 90° по часовой стрелке. Измените исходную матрицу; создавать вторую матрицу по условию нельзя.",
+        "prerequisites": "Вложенные списки, индексы и обмен значений.",
+        "example": "[[1, 2], [3, 4]] → [[3, 1], [4, 2]]"
+      }
+    ]
+  },
+  "C01": {
+    "resources": [
+      {
+        "id": "ad12cb807e2f",
+        "title": "Методы словаря и обход записей",
+        "url": "https://www.youtube.com/watch?v=pZqll5OVbLo",
+        "kind": "video",
+        "author": "Сергей Балакирев · selfedu",
+        "description": "get, keys, values, items и работа с парами ключ–значение.",
+        "focus": "Отсутствие ключа отличается от сохранённого None. Современный dict сохраняет порядок добавления.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "pZqll5OVbLo",
+        "companionUrl": "https://proproprogs.ru/python_base/python3-metody-slovarya-perebor-elementov-slovarya-v-cikle"
+      },
+      {
+        "id": "19929517bedc",
+        "title": "Сортировка по ключу",
+        "url": "https://www.youtube.com/watch?v=M_1cYWm3VyE",
+        "kind": "video",
+        "author": "Сергей Балакирев · selfedu",
+        "description": "Как определить критерий сортировки отдельно от самих объектов.",
+        "focus": "Сравните сортировку по значению и по вычисленному ключу. При равных ключах порядок стабилен.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "M_1cYWm3VyE",
+        "companionUrl": "https://proproprogs.ru/python_base/python3-argument-key-dlya-sortirovki-kollekciy-po-klyuchu"
+      }
+    ],
+    "challenges": [
+      {
+        "id": "merge-two-2d-arrays-by-summing-values",
+        "title": "2570 · Объединить значения по ID",
+        "url": "https://leetcode.com/problems/merge-two-2d-arrays-by-summing-values/",
+        "difficulty": "Easy",
+        "description": "Объедините два массива пар [id, value]. Для одинаковых ID сложите значения, а результат отсортируйте по ID.",
+        "prerequisites": "словарь, накопление и сортировка"
+      },
+      {
+        "id": "jewels",
+        "title": "771 · Подсчёт нужных символов",
+        "url": "https://leetcode.com/problems/jewels-and-stones/",
+        "difficulty": "Easy",
+        "description": "В jewels перечислены нужные символы, stones — строка для подсчёта. Верните число символов stones, входящих в jewels. Регистр важен.",
+        "prerequisites": "цикл, проверка in; множества из L12",
+        "example": "jewels=\"aB\", stones=\"aaBc\" → 3"
+      },
+      {
+        "id": "group-anagrams",
+        "title": "49 · Группы анаграмм",
+        "url": "https://leetcode.com/problems/group-anagrams/",
+        "difficulty": "Medium",
+        "description": "Объедините слова в группы: слова одной группы состоят из одинаковых букв с одинаковыми количествами. Порядок групп не важен.",
+        "prerequisites": "Словари, строки и ключ группировки.",
+        "example": "[\"tea\", \"eat\", \"cat\"] → [[\"tea\", \"eat\"], [\"cat\"]]"
+      }
+    ]
+  },
+  "L14": {
+    "resources": [
+      {
+        "id": "ivan-19",
+        "title": "Урок 19. Вложенные функции",
+        "url": "https://www.youtube.com/watch?v=n76YXSqNRj8&list=PLs2IpQwiXpT1Dusi6jbWTfS7xBGyZK9Ox&index=19",
+        "kind": "video",
+        "author": "Иван Викторович",
+        "description": "Курс «Python для начинающих» · 13:51.",
+        "focus": "Определите, где доступны имена внешней и внутренней функции.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "n76YXSqNRj8",
+        "note": "Основной плейлист курса. Нумерация видео сохранена; здесь они сгруппированы по темам."
+      },
+      {
+        "id": "ivan-20",
+        "title": "Урок 20. Замыкания и декораторы",
+        "url": "https://www.youtube.com/watch?v=Xb5SqVrE8Zc&list=PLs2IpQwiXpT1Dusi6jbWTfS7xBGyZK9Ox&index=20",
+        "kind": "video",
+        "author": "Иван Викторович",
+        "description": "Курс «Python для начинающих» · 21 мин.",
+        "focus": "Проследите, какие значения сохраняет замыкание и что возвращает декоратор.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "Xb5SqVrE8Zc",
+        "note": "Основной плейлист курса. Нумерация видео сохранена; здесь они сгруппированы по темам."
+      },
+      {
+        "id": "ivan-21",
+        "title": "Урок 21. Lambda-функции",
+        "url": "https://www.youtube.com/watch?v=leNzdEI5DtU&list=PLs2IpQwiXpT1Dusi6jbWTfS7xBGyZK9Ox&index=21",
+        "kind": "video",
+        "author": "Иван Викторович",
+        "description": "Курс «Python для начинающих» · 20 мин.",
+        "focus": "Сопоставьте короткое выражение lambda с обычной функцией def.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "leNzdEI5DtU",
+        "note": "Основной плейлист курса. Нумерация видео сохранена; здесь они сгруппированы по темам."
+      }
+    ],
+    "challenges": [
+      {
+        "id": "two-sum",
+        "title": "1 · Два слагаемых",
+        "url": "https://leetcode.com/problems/two-sum/",
+        "difficulty": "Easy",
+        "description": "Найдите индексы двух разных элементов, сумма которых равна target. По условию решение единственное; один элемент нельзя использовать дважды.",
+        "prerequisites": "словарь, индексы, один проход"
+      },
+      {
+        "id": "right-max",
+        "title": "1299 · Максимум справа",
+        "url": "https://leetcode.com/problems/replace-elements-with-greatest-element-on-right-side/",
+        "difficulty": "Easy",
+        "description": "Замените каждый элемент на максимум среди элементов строго справа от него. Последний замените на -1. Верните полученный список.",
+        "prerequisites": "обратный проход по списку и накопление максимума",
+        "example": "[3, 7, 2] → [7, 2, -1]"
+      },
+      {
+        "id": "evaluate-reverse-polish-notation",
+        "title": "150 · Калькулятор со стеком",
+        "url": "https://leetcode.com/problems/evaluate-reverse-polish-notation/",
+        "difficulty": "Medium",
+        "description": "Вычислите выражение, в котором оператор записан после двух операндов. Поддерживаются +, −, *, /. Деление отбрасывает дробную часть в сторону нуля, в том числе для отрицательных чисел.",
+        "prerequisites": "Функции, списки как стек, преобразование строк в числа.",
+        "example": "[\"8\", \"3\", \"-\"] → 5"
+      }
+    ]
+  },
+  "L15": {
+    "resources": [
+      {
+        "id": "bf451399a4bd",
+        "title": "Обработка исключений",
+        "url": "https://www.youtube.com/watch?v=MFIlltaeIgs",
+        "kind": "video",
+        "author": "Сергей Балакирев · selfedu",
+        "description": "Как читать ошибку и перехватывать ожидаемое исключение через try / except.",
+        "focus": "Не закрывайте весь код пустым except. Ошибку реализации лучше увидеть, чем незаметно заменить результат.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "MFIlltaeIgs",
+        "companionUrl": "https://proproprogs.ru/python_oop/python-vvedenie-v-obrabotku-isklyucheniy-bloki-try-except"
+      },
+      {
+        "id": "4b345489a54c",
+        "title": "raise и собственные ошибки",
+        "url": "https://www.youtube.com/watch?v=XR-16WMXZOY",
+        "kind": "video",
+        "author": "Сергей Балакирев · selfedu",
+        "description": "Явный отказ при нарушении условий и создание подходящего исключения.",
+        "focus": "Укажите понятную причину отказа и не теряйте контекст исходной ошибки.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "XR-16WMXZOY",
+        "companionUrl": "https://proproprogs.ru/python_oop/python-instrukciya-raise-i-polzovatelskie-isklyucheniya"
+      }
+    ],
+    "challenges": [
+      {
+        "id": "valid-parentheses",
+        "title": "20 · Правильные скобки",
+        "url": "https://leetcode.com/problems/valid-parentheses/",
+        "difficulty": "Easy",
+        "description": "Проверьте правильность последовательности круглых, квадратных и фигурных скобок. Закрывающая скобка должна соответствовать последней незакрытой.",
+        "prerequisites": "список как стек, условия"
+      },
+      {
+        "id": "move-zeroes",
+        "title": "283 · Перенести нули в конец",
+        "url": "https://leetcode.com/problems/move-zeroes/",
+        "difficulty": "Easy",
+        "description": "Переместите все нули в конец исходного списка. Порядок остальных элементов сохраните. Новый список создавать нельзя.",
+        "prerequisites": "списки, индексы и изменение на месте",
+        "example": "[0, 4, 0, 2] → [4, 2, 0, 0]"
+      },
+      {
+        "id": "evaluate-reverse-polish-notation",
+        "title": "150 · Калькулятор со стеком",
+        "url": "https://leetcode.com/problems/evaluate-reverse-polish-notation/",
+        "difficulty": "Medium",
+        "description": "Вычислите выражение, в котором оператор записан после двух операндов. Поддерживаются +, −, *, /. Деление отбрасывает дробную часть в сторону нуля, в том числе для отрицательных чисел.",
+        "prerequisites": "Функции, списки как стек, преобразование строк в числа.",
+        "example": "[\"8\", \"3\", \"-\"] → 5"
+      }
+    ]
+  },
+  "L16": {
+    "resources": [
+      {
+        "id": "ce0eab17bc59",
+        "title": "Pytest: установка и первые тесты",
+        "url": "https://www.youtube.com/watch?v=VXMECr4_-tE",
+        "kind": "video",
+        "author": "Артём Шумейко",
+        "description": "Короткое введение: обнаружение тестов, assert и запуск pytest. Первый тест начинается с 02:14.",
+        "focus": "Сначала придумайте вход, на котором правдоподобное неправильное решение сломается. assert проверяет результат, а не наличие строк в реализации.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "VXMECr4_-tE",
+        "note": "У автора pytest 7.3.2. Для начала достаточно тестовых функций; пример с классом можно вернуться посмотреть после модуля P14."
+      },
+      {
+        "id": "578fbd5fc22d",
+        "title": "Основы pytest",
+        "url": "https://advpyneng.readthedocs.io/ru/latest/book/01_pytest_basics/index.html",
+        "kind": "article",
+        "author": "Наталья Самойленко",
+        "description": "Тестовые функции, запуск и проверка результатов; выбирайте примеры с обычными функциями.",
+        "focus": "Сначала придумайте вход, на котором правдоподобное неправильное решение сломается. assert проверяет результат, а не наличие строк в реализации.",
+        "checkedAt": "07.09.2026"
+      }
+    ],
+    "challenges": [
+      {
+        "id": "plus-one",
+        "title": "66 · Прибавить единицу",
+        "url": "https://leetcode.com/problems/plus-one/",
+        "difficulty": "Easy",
+        "description": "Число дано массивом десятичных цифр от старшей к младшей. Верните цифры числа, увеличенного на один; проверьте перенос через несколько девяток.",
+        "prerequisites": "списки и перенос разряда"
+      },
+      {
+        "id": "anagram",
+        "title": "242 · Проверка анаграммы",
+        "url": "https://leetcode.com/problems/valid-anagram/",
+        "difficulty": "Easy",
+        "description": "Определите, состоят ли две строки из одинаковых букв в одинаковых количествах. Порядок букв может отличаться.",
+        "prerequisites": "словарь частот или сортировка",
+        "example": "s=\"listen\", t=\"silent\" → True"
+      },
+      {
+        "id": "merge-intervals",
+        "title": "56 · Объединение интервалов",
+        "url": "https://leetcode.com/problems/merge-intervals/",
+        "difficulty": "Medium",
+        "description": "Объедините пересекающиеся интервалы. Соприкасающиеся границы тоже объединяются: интервалы здесь замкнутые. Результат должен покрывать те же точки без перекрытий.",
+        "prerequisites": "Списки, сортировка по началу интервала и проход по соседям.",
+        "example": "[[1, 4], [4, 6], [9, 10]] → [[1, 6], [9, 10]]"
+      }
+    ]
+  },
+  "L17": {
+    "resources": [
+      {
+        "id": "ivan-22",
+        "title": "Урок 22. Работа с файлами",
+        "url": "https://www.youtube.com/watch?v=qIiFMX4sT1o&list=PLs2IpQwiXpT1Dusi6jbWTfS7xBGyZK9Ox&index=22",
+        "kind": "video",
+        "author": "Иван Викторович",
+        "description": "Курс «Python для начинающих» · 24 мин.",
+        "focus": "Проверьте режим открытия файла и закрытие ресурса после работы.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "qIiFMX4sT1o",
+        "note": "Основной плейлист курса. Нумерация видео сохранена; здесь они сгруппированы по темам."
+      },
+      {
+        "id": "ivan-23",
+        "title": "Урок 23. Работа с файлами — продолжение",
+        "url": "https://www.youtube.com/watch?v=oWOq7r3tBIs&list=PLs2IpQwiXpT1Dusi6jbWTfS7xBGyZK9Ox&index=23",
+        "kind": "video",
+        "author": "Иван Викторович",
+        "description": "Курс «Python для начинающих» · 17 мин.",
+        "focus": "Разберите чтение и запись; в браузере файлы находятся в виртуальной файловой системе.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "oWOq7r3tBIs",
+        "note": "Основной плейлист курса. Нумерация видео сохранена; здесь они сгруппированы по темам."
+      },
+      {
+        "id": "ivan-24",
+        "title": "Урок 24. Работа с файловой системой",
+        "url": "https://www.youtube.com/watch?v=5Fi8XvilaCg&list=PLs2IpQwiXpT1Dusi6jbWTfS7xBGyZK9Ox&index=24",
+        "kind": "video",
+        "author": "Иван Викторович",
+        "description": "Курс «Python для начинающих» · 17 мин.",
+        "focus": "Операции затрагивают реальные файлы только при локальном запуске. Для экспериментов используйте отдельную учебную папку.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "5Fi8XvilaCg",
+        "note": "Основной плейлист курса. Нумерация видео сохранена; здесь они сгруппированы по темам."
+      },
+      {
+        "id": "b89e503c8f9c",
+        "title": "Чтение и запись CSV",
+        "url": "https://metanit.com/python/tutorial/4.3.php",
+        "kind": "article",
+        "author": "METANIT",
+        "description": "Работа с модулем csv: поля, строки, чтение и запись табличного файла.",
+        "focus": "Не разбивайте CSV обычным split: внутри поля бывает запятая. Для дат учитывайте часовой пояс, для файлов — кодировку и закрытие ресурса.",
+        "checkedAt": "07.09.2026"
+      },
+      {
+        "id": "da39ab5cb437",
+        "title": "Даты и время в Python",
+        "url": "https://metanit.com/python/tutorial/8.1.php",
+        "author": "METANIT",
+        "description": "date, time, datetime и разбор текстового представления даты.",
+        "focus": "Для задания используйте datetime.fromisoformat для ISO-строк со смещением. Не смешивайте даты без часового пояса с датами, у которых пояс указан.",
+        "kind": "article",
+        "checkedAt": "07.09.2026"
+      }
+    ],
+    "challenges": [
+      {
+        "id": "merge-sorted-array",
+        "title": "88 · Слить отсортированные массивы",
+        "url": "https://leetcode.com/problems/merge-sorted-array/",
+        "difficulty": "Easy",
+        "description": "Объедините два отсортированных массива в первом. Его хвост уже содержит место для второго массива; учитывайте числа m и n, а не нули как маркеры.",
+        "prerequisites": "два указателя, индексы, изменение списка"
+      },
+      {
+        "id": "merge-strings",
+        "title": "1768 · Чередование двух строк",
+        "url": "https://leetcode.com/problems/merge-strings-alternately/",
+        "difficulty": "Easy",
+        "description": "Соберите строку, по очереди беря символ из word1 и word2. Начните с word1; остаток более длинной строки добавьте в конец.",
+        "prerequisites": "цикл, индексы и строки",
+        "example": "word1=\"ab\", word2=\"xyz\" → \"axbyz\""
+      },
+      {
+        "id": "merge-intervals",
+        "title": "56 · Объединение интервалов",
+        "url": "https://leetcode.com/problems/merge-intervals/",
+        "difficulty": "Medium",
+        "description": "Объедините пересекающиеся интервалы. Соприкасающиеся границы тоже объединяются: интервалы здесь замкнутые. Результат должен покрывать те же точки без перекрытий.",
+        "prerequisites": "Списки, сортировка по началу интервала и проход по соседям.",
+        "example": "[[1, 4], [4, 6], [9, 10]] → [[1, 6], [9, 10]]"
+      }
+    ]
+  },
+  "L18": {
+    "resources": [
+      {
+        "id": "ivan-25",
+        "title": "Урок 25. Работа с модулями",
+        "url": "https://www.youtube.com/watch?v=9DQxsq54ysc&list=PLs2IpQwiXpT1Dusi6jbWTfS7xBGyZK9Ox&index=25",
+        "kind": "video",
+        "author": "Иван Викторович",
+        "description": "Курс «Python для начинающих» · 20 мин.",
+        "focus": "Разберите импорт и отделите код модуля от кода его самостоятельного запуска.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "9DQxsq54ysc",
+        "note": "Основной плейлист курса. Нумерация видео сохранена; здесь они сгруппированы по темам."
+      },
+      {
+        "id": "8a583ba815f2",
+        "title": "pip и виртуальное окружение",
+        "url": "https://metanit.com/python/tutorial/6.8.php",
+        "kind": "article",
+        "author": "METANIT",
+        "description": "Создание изолированного окружения и установка библиотек для локальных проектов.",
+        "focus": "Разделите библиотечный модуль и запуск программы. Зафиксируйте зависимости; импорт не должен неожиданно печатать, читать файлы или выполнять расчёт.",
+        "checkedAt": "07.09.2026"
+      }
+    ],
+    "challenges": [
+      {
+        "id": "contains-duplicate",
+        "title": "217 · Найти повтор",
+        "url": "https://leetcode.com/problems/contains-duplicate/",
+        "difficulty": "Easy",
+        "description": "Определите, встречается ли хотя бы одно значение массива больше одного раза.",
+        "prerequisites": "множество или словарь"
+      },
+      {
+        "id": "roman",
+        "title": "13 · Римское число в десятичное",
+        "url": "https://leetcode.com/problems/roman-to-integer/",
+        "difficulty": "Easy",
+        "description": "Преобразуйте корректную римскую запись в целое число. Учитывайте пары с вычитанием: IV, IX, XL, XC, CD, CM. Таблица символов дана в условии LeetCode.",
+        "prerequisites": "словарь, цикл и соседние элементы",
+        "example": "\"XIV\" → 14"
+      },
+      {
+        "id": "group-anagrams",
+        "title": "49 · Группы анаграмм",
+        "url": "https://leetcode.com/problems/group-anagrams/",
+        "difficulty": "Medium",
+        "description": "Объедините слова в группы: слова одной группы состоят из одинаковых букв с одинаковыми количествами. Порядок групп не важен.",
+        "prerequisites": "Словари, строки и ключ группировки.",
+        "example": "[\"tea\", \"eat\", \"cat\"] → [[\"tea\", \"eat\"], [\"cat\"]]"
+      }
+    ]
+  },
+  "L19": {
+    "resources": [
+      {
+        "id": "b4e191c970c0",
+        "title": "Классы и экземпляры",
+        "url": "https://www.youtube.com/watch?v=P4CNNo8jWj4",
+        "kind": "video",
+        "author": "Сергей Балакирев · selfedu",
+        "description": "Создание типа объектов и различие атрибутов класса и экземпляра.",
+        "focus": "Общие атрибуты класса и личное состояние экземпляра имеют разные назначения.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "P4CNNo8jWj4",
+        "companionUrl": "https://proproprogs.ru/python_oop/klassy-i-obekty-atributy-klassov-i-obektov"
+      },
+      {
+        "id": "31d58cc31b71",
+        "title": "Методы и self",
+        "url": "https://www.youtube.com/watch?v=Lw8TeLS4_IA",
+        "kind": "video",
+        "author": "Сергей Балакирев · selfedu",
+        "description": "Работа метода с состоянием конкретного объекта.",
+        "focus": "self — тот экземпляр, на котором вызван метод. Проверьте два независимых объекта.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "Lw8TeLS4_IA",
+        "companionUrl": "https://proproprogs.ru/python_oop/metody-klassov-parametr-self"
+      },
+      {
+        "id": "ec5602f3b870",
+        "title": "Инициализация объекта",
+        "url": "https://www.youtube.com/watch?v=-J3Ou8-8vVk",
+        "kind": "video",
+        "author": "Сергей Балакирев · selfedu",
+        "description": "Назначение начального состояния в __init__.",
+        "focus": "Для практики достаточно __init__; управление ресурсами выполняйте через with, а не __del__.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "-J3Ou8-8vVk",
+        "companionUrl": "https://proproprogs.ru/python_oop/inicializator-init-i-finalizator-del",
+        "note": "Для этой темы нужен __init__. Освобождение ресурсов через __del__ не используйте как гарантированное: для файлов применяйте with."
+      }
+    ],
+    "challenges": [
+      {
+        "id": "design-parking-system",
+        "title": "1603 · Парковочная система",
+        "url": "https://leetcode.com/problems/design-parking-system/",
+        "difficulty": "Easy",
+        "description": "Реализуйте объект с количеством мест трёх размеров и методом добавления автомобиля. Успешное добавление уменьшает остаток; при нехватке мест верните false.",
+        "prerequisites": "класс, __init__, состояние экземпляра"
+      },
+      {
+        "id": "contains-duplicate",
+        "title": "217 · Найти повтор",
+        "url": "https://leetcode.com/problems/contains-duplicate/",
+        "difficulty": "Easy",
+        "description": "Определите, встречается ли хотя бы одно значение массива больше одного раза.",
+        "prerequisites": "множество или словарь"
+      },
+      {
+        "id": "design-browser-history",
+        "title": "1472 · История браузера",
+        "url": "https://leetcode.com/problems/design-browser-history/",
+        "difficulty": "Medium",
+        "description": "Реализуйте историю одной вкладки: переход на страницу, назад и вперёд на заданное число шагов. Новый переход удаляет историю впереди текущей страницы.",
+        "prerequisites": "Класс, список страниц и индекс текущей страницы.",
+        "example": "visit(\"b\"), visit(\"c\"), back(1) → \"b\""
+      }
+    ]
+  },
+  "C02": {
+    "resources": [
+      {
+        "id": "4b345489a54c",
+        "title": "raise и собственные ошибки",
+        "url": "https://www.youtube.com/watch?v=XR-16WMXZOY",
+        "kind": "video",
+        "author": "Сергей Балакирев · selfedu",
+        "description": "Явный отказ при нарушении условий и создание подходящего исключения.",
+        "focus": "Укажите понятную причину отказа и не теряйте контекст исходной ошибки.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "XR-16WMXZOY",
+        "companionUrl": "https://proproprogs.ru/python_oop/python-instrukciya-raise-i-polzovatelskie-isklyucheniya"
+      },
+      {
+        "id": "1f9ef349d644",
+        "title": "Чтение файлов",
+        "url": "https://www.youtube.com/watch?v=aBuerGPuhME",
+        "kind": "video",
+        "author": "Сергей Балакирев · selfedu",
+        "description": "Открытие файла, чтение текста и последовательная обработка строк.",
+        "focus": "Выбирайте кодировку явно; текущая рабочая папка влияет на относительный путь.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "aBuerGPuhME",
+        "companionUrl": "https://proproprogs.ru/python_base/python3-funkciya-open-chtenie-dannyh-iz-fayla"
+      }
+    ],
+    "challenges": [
+      {
+        "id": "merge-two-2d-arrays-by-summing-values",
+        "title": "2570 · Объединить значения по ID",
+        "url": "https://leetcode.com/problems/merge-two-2d-arrays-by-summing-values/",
+        "difficulty": "Easy",
+        "description": "Объедините два массива пар [id, value]. Для одинаковых ID сложите значения, а результат отсортируйте по ID.",
+        "prerequisites": "словарь, накопление и сортировка"
+      },
+      {
+        "id": "anagram",
+        "title": "242 · Проверка анаграммы",
+        "url": "https://leetcode.com/problems/valid-anagram/",
+        "difficulty": "Easy",
+        "description": "Определите, состоят ли две строки из одинаковых букв в одинаковых количествах. Порядок букв может отличаться.",
+        "prerequisites": "словарь частот или сортировка",
+        "example": "s=\"listen\", t=\"silent\" → True"
+      },
+      {
+        "id": "group-anagrams",
+        "title": "49 · Группы анаграмм",
+        "url": "https://leetcode.com/problems/group-anagrams/",
+        "difficulty": "Medium",
+        "description": "Объедините слова в группы: слова одной группы состоят из одинаковых букв с одинаковыми количествами. Порядок групп не важен.",
+        "prerequisites": "Словари, строки и ключ группировки.",
+        "example": "[\"tea\", \"eat\", \"cat\"] → [[\"tea\", \"eat\"], [\"cat\"]]"
+      }
+    ]
+  },
+  "L20": {
+    "resources": [
+      {
+        "id": "1cb93bb1248a",
+        "title": "Итераторы и next",
+        "url": "https://www.youtube.com/watch?v=Kro9UOtkZEk",
+        "kind": "video",
+        "author": "Сергей Балакирев · selfedu",
+        "description": "Как Python получает последовательные элементы и сообщает об окончании.",
+        "focus": "Один итератор хранит позицию: повторный обход может оказаться пустым.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "Kro9UOtkZEk",
+        "companionUrl": "https://proproprogs.ru/python_base/python3-iterator-i-iteriruemye-obekty-funkcii-iter-i-next"
+      },
+      {
+        "id": "9cebd9a8a39e",
+        "title": "Генераторы и yield",
+        "url": "https://www.youtube.com/watch?v=_k9CoVcNoMU",
+        "kind": "video",
+        "author": "Сергей Балакирев · selfedu",
+        "description": "Отложенное вычисление последовательности без хранения всех значений.",
+        "focus": "После yield функция приостанавливается. Продолжение начнётся при следующем запросе элемента.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "_k9CoVcNoMU",
+        "companionUrl": "https://proproprogs.ru/python_base/python3-funkciya-generator-operator-yield"
+      }
+    ],
+    "challenges": [
+      {
+        "id": "find-pivot-index",
+        "title": "724 · Индекс равновесия",
+        "url": "https://leetcode.com/problems/find-pivot-index/",
+        "difficulty": "Easy",
+        "description": "Верните самый левый индекс, слева и справа от которого одинаковые суммы. Сам элемент в суммы не входит; если индекса нет, верните -1.",
+        "prerequisites": "сумма, один проход, пустая сторона"
+      },
+      {
+        "id": "subsequence",
+        "title": "392 · Подпоследовательность",
+        "url": "https://leetcode.com/problems/is-subsequence/",
+        "difficulty": "Easy",
+        "description": "Можно ли получить s, удалив часть символов из t без перестановки остальных? Пустая строка подходит всегда.",
+        "prerequisites": "два указателя; цикл и строки",
+        "example": "s=\"ac\", t=\"abcd\" → True"
+      },
+      {
+        "id": "subarray-sum-equals-k",
+        "title": "560 · Сколько участков дают нужную сумму",
+        "url": "https://leetcode.com/problems/subarray-sum-equals-k/",
+        "difficulty": "Medium",
+        "description": "Посчитайте непустые непрерывные участки массива, сумма которых равна k. Числа могут быть отрицательными; совпавшие участки разных позиций считаются отдельно.",
+        "prerequisites": "Списки, накопленная сумма и словарь частот.",
+        "example": "nums = [1, 2, 1], k = 3 → 2"
+      }
+    ]
+  },
+  "L21": {
+    "resources": [
+      {
+        "id": "49d422517df2",
+        "title": "Алгоритм Евклида",
+        "url": "https://www.youtube.com/watch?v=IEORD_eVfCo",
+        "kind": "video",
+        "author": "Сергей Балакирев · selfedu",
+        "description": "Пример преобразования математической идеи в последовательность уменьшающих задачу шагов.",
+        "focus": "Сравните количество шагов разных способов; корректность и стоимость — отдельные вопросы.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "IEORD_eVfCo",
+        "companionUrl": "https://proproprogs.ru/python_base/python3-algoritm-evklida-dlya-nahozhdeniya-nod"
+      },
+      {
+        "id": "c24d106463aa",
+        "title": "Скользящее окно на реальном собеседовании",
+        "url": "https://www.youtube.com/watch?v=J_kzLifqFco",
+        "kind": "video",
+        "author": "Вадим Новосёлов",
+        "description": "Разбор поиска подстроки без повторов: идея окна, границы и оценка сложности.",
+        "focus": "Отделите стоимость одного шага от числа шагов. Границы окна двигаются только вперёд; повторный пересчёт каждого окна может дать квадратичное время.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "J_kzLifqFco",
+        "note": "Первая задача ролика использует NumPy; здесь нужен последующий разбор строковой задачи. Видео сложнее базовых уроков: смотрите после коллекций."
+      },
+      {
+        "id": "f6decf3a96c0",
+        "title": "Алгоритмы и сложность",
+        "url": "https://education.yandex.ru/handbook/algorithms/article/algoritmy-i-slozhnost",
+        "kind": "article",
+        "author": "Яндекс Образование",
+        "description": "Как оценивать рост времени выполнения и сравнивать алгоритмы независимо от скорости компьютера.",
+        "focus": "Отделите стоимость одного шага от числа шагов. Границы окна двигаются только вперёд; повторный пересчёт каждого окна может дать квадратичное время.",
+        "checkedAt": "07.09.2026"
+      }
+    ],
+    "challenges": [
+      {
+        "id": "maximum-average-subarray-i",
+        "title": "643 · Максимальное среднее окна",
+        "url": "https://leetcode.com/problems/maximum-average-subarray-i/",
+        "difficulty": "Easy",
+        "description": "Найдите максимальное среднее среди непрерывных фрагментов длины k. Верните само среднее, учитывая допустимую погрешность 0.00001.",
+        "prerequisites": "скользящее окно фиксированной длины"
+      },
+      {
+        "id": "insert",
+        "title": "35 · Место числа в отсортированном списке",
+        "url": "https://leetcode.com/problems/search-insert-position/",
+        "difficulty": "Easy",
+        "description": "Верните индекс target или позицию, куда его нужно вставить с сохранением сортировки. Элементы различны. Требуется O(log n).",
+        "prerequisites": "бинарный поиск; дополнительная практика после L21",
+        "example": "nums=[2, 4, 8], target=5 → 2"
+      },
+      {
+        "id": "longest-substring-without-repeating-characters",
+        "title": "3 · Участок строки без повторов",
+        "url": "https://leetcode.com/problems/longest-substring-without-repeating-characters/",
+        "difficulty": "Medium",
+        "description": "Найдите длину самого длинного непрерывного фрагмента строки, в котором ни один символ не повторяется. Пропускать символы внутри фрагмента нельзя.",
+        "prerequisites": "Строки, множество или словарь. Эффективное решение использует скользящее окно из L21.",
+        "example": "s = \"abca\" → 3"
+      }
+    ]
+  },
+  "L22": {
+    "resources": [
+      {
+        "id": "6d9082f0cb65",
+        "title": "Массивы NumPy и dtype",
+        "url": "https://www.youtube.com/watch?v=KaT3aPjjx1A",
+        "kind": "video",
+        "author": "Сергей Балакирев · selfedu",
+        "description": "Создание однородных массивов и выбор типа элементов.",
+        "focus": "Для арифметики с пикселями сначала расширьте тип; uint8 не хранит значения за пределами 0…255.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "KaT3aPjjx1A",
+        "companionUrl": "https://proproprogs.ru/modules/numpy-osnovnye-tipy-dannyh-sozdanie-massivov-funkciey-array",
+        "note": "В видео используется более ранняя NumPy. Для практики выбирайте явные dtype: float64, int64, uint8; устаревшие псевдонимы типов не нужны."
+      },
+      {
+        "id": "6f9972019e56",
+        "title": "Форма массива и оси",
+        "url": "https://www.youtube.com/watch?v=POgD3xN5Q6Y",
+        "kind": "video",
+        "author": "Сергей Балакирев · selfedu",
+        "description": "reshape, добавление и удаление размерностей.",
+        "focus": "Произведение размеров должно сохраняться. Записывайте назначение каждой оси.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "POgD3xN5Q6Y",
+        "companionUrl": "https://proproprogs.ru/modules/numpy-izmenenie-formy-massivov-dobavlenie-i-udalenie-osey",
+        "note": "В видео используется более ранняя NumPy. Для практики выбирайте явные dtype: float64, int64, uint8; устаревшие псевдонимы типов не нужны."
+      },
+      {
+        "id": "b1e24e03aa50",
+        "title": "Broadcasting",
+        "url": "https://www.youtube.com/watch?v=j9SPgWy9vB0",
+        "kind": "video",
+        "author": "Сергей Балакирев · selfedu",
+        "description": "Операции между массивами совместимых форм без ручного повторения данных.",
+        "focus": "Сравнивайте размеры с правого края: они должны совпадать или один из них равен единице.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "j9SPgWy9vB0",
+        "companionUrl": "https://proproprogs.ru/modules/numpy-translirovanie-massivov",
+        "note": "В видео используется более ранняя NumPy. Для практики выбирайте явные dtype: float64, int64, uint8; устаревшие псевдонимы типов не нужны."
+      }
+    ],
+    "challenges": [
+      {
+        "id": "transpose-matrix",
+        "title": "867 · Транспонировать матрицу",
+        "url": "https://leetcode.com/problems/transpose-matrix/",
+        "difficulty": "Easy",
+        "description": "Поменяйте строки и столбцы местами: элемент [i][j] становится элементом [j][i]. Проверьте прямоугольную матрицу.",
+        "prerequisites": "двумерные списки и индексы"
+      },
+      {
+        "id": "wealth",
+        "title": "1672 · Самый большой баланс",
+        "url": "https://leetcode.com/problems/richest-customer-wealth/",
+        "difficulty": "Easy",
+        "description": "Для каждого клиента сложите суммы на его счетах и верните самый большой итог. Строка матрицы — один клиент.",
+        "prerequisites": "списки списков, sum и max",
+        "example": "[[2, 4], [3, 8]] → 11"
+      },
+      {
+        "id": "rotate-image",
+        "title": "48 · Поворот квадратного изображения",
+        "url": "https://leetcode.com/problems/rotate-image/",
+        "difficulty": "Medium",
+        "description": "Поверните квадратную матрицу на 90° по часовой стрелке. Измените исходную матрицу; создавать вторую матрицу по условию нельзя.",
+        "prerequisites": "Вложенные списки, индексы и обмен значений.",
+        "example": "[[1, 2], [3, 4]] → [[3, 1], [4, 2]]"
+      }
+    ]
+  },
+  "L23": {
+    "resources": [
+      {
+        "id": "2801f618ef83",
+        "title": "Анализ данных на pandas с нуля",
+        "url": "https://www.youtube.com/watch?v=Y_RFuyZK-YY",
+        "kind": "video",
+        "author": "Руслан Сенаторов · SenatorovAI",
+        "description": "Вводное видео о работе с табличными данными. После просмотра переходите к материалам про объединение и группировку.",
+        "focus": "Проверяйте уникальность ключей перед merge и число строк после. Отличайте пропуск от нуля; для новой колонки используйте явное присваивание.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "Y_RFuyZK-YY",
+        "note": "Видео 2024 года. В pandas 2/3 для добавления строк используйте pd.concat; старый DataFrame.append удалён."
+      },
+      {
+        "id": "3422b26333c1",
+        "title": "pandas: таблицы, фильтрация и группировка",
+        "url": "https://education.yandex.ru/handbook/python/article/modul-pandas",
+        "author": "Яндекс Образование",
+        "description": "Series и DataFrame, выбор строк и столбцов, агрегаты и группировка.",
+        "focus": "Различайте число строк size и число заполненных значений count. Для изменения ячейки используйте одно присваивание через loc.",
+        "kind": "article",
+        "checkedAt": "07.09.2026"
+      },
+      {
+        "id": "88a022d914db",
+        "title": "pandas: объединение и группировка",
+        "url": "https://mipt-stats.gitlab.io/courses/python/10_pandas2.html",
+        "kind": "article",
+        "author": "Физтех.Статистика",
+        "description": "Разделы про concat, merge, groupby и сводные таблицы. Перед задачами разберите результат соединения на небольшом примере.",
+        "focus": "Проверяйте уникальность ключей перед merge и число строк после. Отличайте пропуск от нуля; для новой колонки используйте явное присваивание.",
+        "checkedAt": "07.09.2026",
+        "note": "Пропустите раздел 2.1 про df.append: метод удалён в pandas 2.0. Используйте раздел 2.2 про pd.concat. Для агрегатов выбирайте числовые столбцы явно."
+      }
+    ],
+    "challenges": [
+      {
+        "id": "merge-two-2d-arrays-by-summing-values",
+        "title": "2570 · Объединить значения по ID",
+        "url": "https://leetcode.com/problems/merge-two-2d-arrays-by-summing-values/",
+        "difficulty": "Easy",
+        "description": "Объедините два массива пар [id, value]. Для одинаковых ID сложите значения, а результат отсортируйте по ID.",
+        "prerequisites": "словарь, накопление и сортировка"
+      },
+      {
+        "id": "wealth",
+        "title": "1672 · Самый большой баланс",
+        "url": "https://leetcode.com/problems/richest-customer-wealth/",
+        "difficulty": "Easy",
+        "description": "Для каждого клиента сложите суммы на его счетах и верните самый большой итог. Строка матрицы — один клиент.",
+        "prerequisites": "списки списков, sum и max",
+        "example": "[[2, 4], [3, 8]] → 11"
+      },
+      {
+        "id": "group-anagrams",
+        "title": "49 · Группы анаграмм",
+        "url": "https://leetcode.com/problems/group-anagrams/",
+        "difficulty": "Medium",
+        "description": "Объедините слова в группы: слова одной группы состоят из одинаковых букв с одинаковыми количествами. Порядок групп не важен.",
+        "prerequisites": "Словари, строки и ключ группировки.",
+        "example": "[\"tea\", \"eat\", \"cat\"] → [[\"tea\", \"eat\"], [\"cat\"]]"
+      }
+    ]
+  },
+  "L24": {
+    "resources": [
+      {
+        "id": "34b99d8c6e5b",
+        "title": "Первый график Matplotlib",
+        "url": "https://www.youtube.com/watch?v=clDQPyQJ-hc",
+        "kind": "video",
+        "author": "Сергей Балакирев · selfedu",
+        "description": "Создание графика и базовый цикл работы с pyplot.",
+        "focus": "Выберите единицы измерения и подписи осей; в платформе рисунки появляются в панели результата.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "clDQPyQJ-hc",
+        "companionUrl": "https://proproprogs.ru/modules/matplotlib-ustanovka-paketa-i-osnovnye-vozmozhnosti"
+      },
+      {
+        "id": "398855b33639",
+        "title": "Гистограмма и столбчатая диаграмма",
+        "url": "https://www.youtube.com/watch?v=LIj3A2gnmKc",
+        "kind": "video",
+        "author": "Сергей Балакирев · selfedu",
+        "description": "Различие графиков распределения и сравнения категорий.",
+        "focus": "Гистограмма зависит от границ интервалов; столбцы категорий не заменяют распределение.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "LIj3A2gnmKc",
+        "companionUrl": "https://proproprogs.ru/modules/matplotlib-risuem-gistogrammy-stolbchatye-i-krugovye-diagrammy"
+      }
+    ],
+    "challenges": [
+      {
+        "id": "find-the-highest-altitude",
+        "title": "1732 · Наибольшая высота",
+        "url": "https://leetcode.com/problems/find-the-highest-altitude/",
+        "difficulty": "Easy",
+        "description": "Путешествие начинается на высоте ноль. По массиву изменений высоты найдите наибольшую достигнутую высоту, включая старт.",
+        "prerequisites": "накопленная сумма и максимум"
+      },
+      {
+        "id": "stock",
+        "title": "121 · Максимальная прибыль",
+        "url": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
+        "difficulty": "Easy",
+        "description": "Выберите одну покупку и одну последующую продажу. Верните наибольшую разницу цен; если прибыли нет — 0.",
+        "prerequisites": "один проход, сохранение минимального значения",
+        "example": "prices=[5, 2, 6, 1] → 4"
+      },
+      {
+        "id": "subarray-sum-equals-k",
+        "title": "560 · Сколько участков дают нужную сумму",
+        "url": "https://leetcode.com/problems/subarray-sum-equals-k/",
+        "difficulty": "Medium",
+        "description": "Посчитайте непустые непрерывные участки массива, сумма которых равна k. Числа могут быть отрицательными; совпавшие участки разных позиций считаются отдельно.",
+        "prerequisites": "Списки, накопленная сумма и словарь частот.",
+        "example": "nums = [1, 2, 1], k = 3 → 2"
+      }
+    ]
+  },
+  "L25": {
+    "resources": [
+      {
+        "id": "8ab3bb72c383",
+        "title": "Основы Jupyter Notebook",
+        "url": "https://www.youtube.com/watch?v=s0q2GpcYxo4",
+        "kind": "video",
+        "author": "PyLounge",
+        "description": "Создание блокнота, ячейки с кодом и Markdown, запуск вычислений и сохранение результата.",
+        "focus": "Перезапустите ядро и выполните все ячейки сверху вниз. Все входы, версии и причины исключения данных должны быть видны в итоговом отчёте.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "s0q2GpcYxo4",
+        "note": "В видео старый интерфейс Notebook. В современном Notebook/JupyterLab названия меню могут отличаться; старые плагины nbextensions устанавливать не нужно."
+      }
+    ],
+    "challenges": [
+      {
+        "id": "find-pivot-index",
+        "title": "724 · Индекс равновесия",
+        "url": "https://leetcode.com/problems/find-pivot-index/",
+        "difficulty": "Easy",
+        "description": "Верните самый левый индекс, слева и справа от которого одинаковые суммы. Сам элемент в суммы не входит; если индекса нет, верните -1.",
+        "prerequisites": "сумма, один проход, пустая сторона"
+      },
+      {
+        "id": "right-max",
+        "title": "1299 · Максимум справа",
+        "url": "https://leetcode.com/problems/replace-elements-with-greatest-element-on-right-side/",
+        "difficulty": "Easy",
+        "description": "Замените каждый элемент на максимум среди элементов строго справа от него. Последний замените на -1. Верните полученный список.",
+        "prerequisites": "обратный проход по списку и накопление максимума",
+        "example": "[3, 7, 2] → [7, 2, -1]"
+      },
+      {
+        "id": "subarray-sum-equals-k",
+        "title": "560 · Сколько участков дают нужную сумму",
+        "url": "https://leetcode.com/problems/subarray-sum-equals-k/",
+        "difficulty": "Medium",
+        "description": "Посчитайте непустые непрерывные участки массива, сумма которых равна k. Числа могут быть отрицательными; совпавшие участки разных позиций считаются отдельно.",
+        "prerequisites": "Списки, накопленная сумма и словарь частот.",
+        "example": "nums = [1, 2, 1], k = 3 → 2"
+      }
+    ]
+  },
+  "C03": {
+    "resources": [
+      {
+        "id": "5864a5931feb",
+        "title": "Линии и оформление графика",
+        "url": "https://www.youtube.com/watch?v=wZ47IOElaik",
+        "kind": "video",
+        "author": "Сергей Балакирев · selfedu",
+        "description": "Построение зависимости и управление стилем линии.",
+        "focus": "Проверьте соответствие x и y, подпишите оси и не соединяйте несвязанные группы одной линией.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "wZ47IOElaik",
+        "companionUrl": "https://proproprogs.ru/modules/matplotlib-funkciya-plot-dlya-postroeniya-i-oformleniya-dvumernyh-grafikov"
+      },
+      {
+        "id": "2801f618ef83",
+        "title": "Повторение pandas перед проектом",
+        "url": "https://www.youtube.com/watch?v=Y_RFuyZK-YY",
+        "kind": "video",
+        "author": "Руслан Сенаторов · SenatorovAI",
+        "description": "Повторите операции над таблицей перед построением отчёта по потоку кадров.",
+        "focus": "Начните с проверки данных и единицы наблюдения. Для каждого устройства и дня покажите количество кадров, пропуски и качество без подмены знаменателя.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "Y_RFuyZK-YY",
+        "note": "Это повторение материала L23. Для объединения строк используйте pd.concat, а не удалённый DataFrame.append."
+      },
+      {
+        "id": "3422b26333c1",
+        "title": "pandas: таблицы, фильтрация и группировка",
+        "url": "https://education.yandex.ru/handbook/python/article/modul-pandas",
+        "author": "Яндекс Образование",
+        "description": "Series и DataFrame, выбор строк и столбцов, агрегаты и группировка.",
+        "focus": "Различайте число строк size и число заполненных значений count. Для изменения ячейки используйте одно присваивание через loc.",
+        "kind": "article",
+        "checkedAt": "07.09.2026"
+      },
+      {
+        "id": "88a022d914db",
+        "title": "pandas: объединение и группировка",
+        "url": "https://mipt-stats.gitlab.io/courses/python/10_pandas2.html",
+        "kind": "article",
+        "author": "Физтех.Статистика",
+        "description": "Разделы про concat, merge, groupby и сводные таблицы. Перед задачами разберите результат соединения на небольшом примере.",
+        "focus": "Начните с проверки данных и единицы наблюдения. Для каждого устройства и дня покажите количество кадров, пропуски и качество без подмены знаменателя.",
+        "checkedAt": "07.09.2026",
+        "note": "Пропустите раздел 2.1 про df.append: метод удалён в pandas 2.0. Используйте раздел 2.2 про pd.concat. Для агрегатов выбирайте числовые столбцы явно."
+      }
+    ],
+    "challenges": [
+      {
+        "id": "maximum-average-subarray-i",
+        "title": "643 · Максимальное среднее окна",
+        "url": "https://leetcode.com/problems/maximum-average-subarray-i/",
+        "difficulty": "Easy",
+        "description": "Найдите максимальное среднее среди непрерывных фрагментов длины k. Верните само среднее, учитывая допустимую погрешность 0.00001.",
+        "prerequisites": "скользящее окно фиксированной длины"
+      },
+      {
+        "id": "stock",
+        "title": "121 · Максимальная прибыль",
+        "url": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
+        "difficulty": "Easy",
+        "description": "Выберите одну покупку и одну последующую продажу. Верните наибольшую разницу цен; если прибыли нет — 0.",
+        "prerequisites": "один проход, сохранение минимального значения",
+        "example": "prices=[5, 2, 6, 1] → 4"
+      },
+      {
+        "id": "subarray-sum-equals-k",
+        "title": "560 · Сколько участков дают нужную сумму",
+        "url": "https://leetcode.com/problems/subarray-sum-equals-k/",
+        "difficulty": "Medium",
+        "description": "Посчитайте непустые непрерывные участки массива, сумма которых равна k. Числа могут быть отрицательными; совпавшие участки разных позиций считаются отдельно.",
+        "prerequisites": "Списки, накопленная сумма и словарь частот.",
+        "example": "nums = [1, 2, 1], k = 3 → 2"
+      }
+    ]
+  },
+  "L26": {
+    "resources": [
+      {
+        "id": "292211e62228",
+        "title": "Как устроена обучающая выборка",
+        "url": "https://www.youtube.com/watch?v=WWXSxHz15hA",
+        "kind": "video",
+        "author": "Сергей Балакирев · selfedu",
+        "description": "Признаки, ответы, дисбаланс и представительность данных.",
+        "focus": "Похожие кадры могут быть одним источником информации; отделяйте независимые объекты до разбиения.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "WWXSxHz15hA",
+        "companionUrl": "https://proproprogs.ru/nn_pytorch/pytorch-formaty-predstavleniya-vyborok-sbalansirovannost-i-reprezentativnost",
+        "note": "Код PyTorch из видео выполняется локально или в notebook с установленным PyTorch. Встроенные задания темы закрепляют эти идеи на Python/NumPy."
+      },
+      {
+        "id": "807483cc3d80",
+        "title": "Переобучение и оценка качества",
+        "url": "https://www.youtube.com/watch?v=uxhDeewJq9U",
+        "kind": "video",
+        "author": "Сергей Балакирев · selfedu",
+        "description": "Почему качество на обучении не гарантирует качество на новых данных.",
+        "focus": "Следите за раздельными train и validation. Финальный test не используется для настройки.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "uxhDeewJq9U",
+        "companionUrl": "https://proproprogs.ru/nn_pytorch/pytorch-pereobuchenie-overfitting-kriterii-ostanova-obucheniya",
+        "note": "Код PyTorch из видео выполняется локально или в notebook с установленным PyTorch. Встроенные задания темы закрепляют эти идеи на Python/NumPy."
+      },
+      {
+        "id": "e8b69190e4c1",
+        "title": "Кросс-валидация и разделение данных",
+        "url": "https://education.yandex.ru/handbook/ml/article/kross-validaciya",
+        "kind": "article",
+        "author": "Яндекс Образование · ШАД",
+        "description": "Начните с Hold-out, затем разберите ограничения случайного разбиения. Свяжите их с независимостью объектов в своём наборе данных.",
+        "focus": "Сравнивайте модель с простым baseline. Разделяйте данные до обучения преобразований; тест не участвует в fit или выборе настроек.",
+        "checkedAt": "07.09.2026"
+      }
+    ],
+    "challenges": [
+      {
+        "id": "contains-duplicate",
+        "title": "217 · Найти повтор",
+        "url": "https://leetcode.com/problems/contains-duplicate/",
+        "difficulty": "Easy",
+        "description": "Определите, встречается ли хотя бы одно значение массива больше одного раза.",
+        "prerequisites": "множество или словарь"
+      },
+      {
+        "id": "stock",
+        "title": "121 · Максимальная прибыль",
+        "url": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
+        "difficulty": "Easy",
+        "description": "Выберите одну покупку и одну последующую продажу. Верните наибольшую разницу цен; если прибыли нет — 0.",
+        "prerequisites": "один проход, сохранение минимального значения",
+        "example": "prices=[5, 2, 6, 1] → 4"
+      },
+      {
+        "id": "group-anagrams",
+        "title": "49 · Группы анаграмм",
+        "url": "https://leetcode.com/problems/group-anagrams/",
+        "difficulty": "Medium",
+        "description": "Объедините слова в группы: слова одной группы состоят из одинаковых букв с одинаковыми количествами. Порядок групп не важен.",
+        "prerequisites": "Словари, строки и ключ группировки.",
+        "example": "[\"tea\", \"eat\", \"cat\"] → [[\"tea\", \"eat\"], [\"cat\"]]"
+      }
+    ]
+  },
+  "L27": {
+    "resources": [
+      {
+        "id": "d15e3b4d4011",
+        "title": "Полносвязная нейросеть",
+        "url": "https://www.youtube.com/watch?v=SpHqpbj0inA",
+        "kind": "video",
+        "author": "Сергей Балакирев · selfedu",
+        "description": "Нейрон, веса, слои и получение предсказания.",
+        "focus": "Вычислите один нейрон руками: сумма взвешенных входов и смещение.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "SpHqpbj0inA",
+        "companionUrl": "https://proproprogs.ru/nn_pytorch/pytorch-struktura-i-princip-raboty-polnosvyaznyh-neyronnyh-setey",
+        "note": "Код PyTorch из видео выполняется локально или в notebook с установленным PyTorch. Встроенные задания темы закрепляют эти идеи на Python/NumPy."
+      },
+      {
+        "id": "69b309a1c7ae",
+        "title": "Идея градиентного спуска",
+        "url": "https://www.youtube.com/watch?v=AuxwyU93ENc",
+        "kind": "video",
+        "author": "Сергей Балакирев · selfedu",
+        "description": "Как ошибка и её производная задают изменение веса.",
+        "focus": "При положительной производной шаг идёт в сторону уменьшения веса; проверьте масштаб learning rate.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "AuxwyU93ENc",
+        "companionUrl": "https://proproprogs.ru/nn_pytorch/pytorch-ideya-obucheniya-ns-gradientnym-algoritmom",
+        "note": "Код PyTorch из видео выполняется локально или в notebook с установленным PyTorch. Встроенные задания темы закрепляют эти идеи на Python/NumPy."
+      },
+      {
+        "id": "59d2dc9efd43",
+        "title": "Градиентные методы",
+        "url": "https://education.yandex.ru/handbook/math/article/gradientnie-metodi",
+        "kind": "article",
+        "author": "Яндекс Образование",
+        "description": "Математическое объяснение шага градиентного спуска. Сопоставьте знак производной с направлением обновления веса.",
+        "focus": "Сначала вычислите предсказание, затем ошибку и производную. Проверьте знак шага и влияние learning rate на уменьшение ошибки.",
+        "checkedAt": "07.09.2026",
+        "note": "Понадобится понятие производной. Сначала посмотрите видео с геометрическим объяснением шага."
+      }
+    ],
+    "challenges": [
+      {
+        "id": "maximum-average-subarray-i",
+        "title": "643 · Максимальное среднее окна",
+        "url": "https://leetcode.com/problems/maximum-average-subarray-i/",
+        "difficulty": "Easy",
+        "description": "Найдите максимальное среднее среди непрерывных фрагментов длины k. Верните само среднее, учитывая допустимую погрешность 0.00001.",
+        "prerequisites": "скользящее окно фиксированной длины"
+      },
+      {
+        "id": "running-sum-of-1d-array",
+        "title": "1480 · Накопленные суммы",
+        "url": "https://leetcode.com/problems/running-sum-of-1d-array/",
+        "difficulty": "Easy",
+        "description": "Постройте массив, где на позиции i стоит сумма исходных элементов от начала до i включительно.",
+        "prerequisites": "цикл, список и накопитель"
+      },
+      {
+        "id": "powx-n",
+        "title": "50 · Быстрое возведение в степень",
+        "url": "https://leetcode.com/problems/powx-n/",
+        "difficulty": "Medium",
+        "description": "Вычислите x в целой степени n. Учтите нулевую и отрицательную степени. Большие n требуют способа быстрее, чем n последовательных умножений.",
+        "prerequisites": "Арифметика, циклы; идея двоичного возведения в степень.",
+        "example": "x = 2, n = -3 → 0.125"
+      }
+    ]
+  },
+  "L28": {
+    "resources": [
+      {
+        "id": "2e6b7368e2d5",
+        "title": "Тензоры: форма и заполнение",
+        "url": "https://www.youtube.com/watch?v=YJqstx6HNko",
+        "kind": "video",
+        "author": "Сергей Балакирев · selfedu",
+        "description": "Создание многомерных данных и изменение формы тензора.",
+        "focus": "Различайте перестановку осей и reshape: одинаковое число элементов ещё не означает одинаковый смысл.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "YJqstx6HNko",
+        "companionUrl": "https://proproprogs.ru/nn_pytorch/pytorch-tenzory-avtozapolnenie-izmenenie-formy",
+        "note": "Код PyTorch из видео выполняется локально или в notebook с установленным PyTorch. Встроенные задания темы закрепляют эти идеи на Python/NumPy."
+      },
+      {
+        "id": "d80fe61f0271",
+        "title": "Dataset и DataLoader",
+        "url": "https://www.youtube.com/watch?v=fiIl93g23Mc",
+        "kind": "video",
+        "author": "Сергей Балакирев · selfedu",
+        "description": "Разделение хранения примеров и подачи пакетов модели.",
+        "focus": "Сначала определите независимые объекты, затем наборы и загрузчики. shuffle не исправляет утечку.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "fiIl93g23Mc",
+        "companionUrl": "https://proproprogs.ru/nn_pytorch/pytorch-klassy-dataset-i-dataloader",
+        "note": "Код PyTorch из видео выполняется локально или в notebook с установленным PyTorch. Встроенные задания темы закрепляют эти идеи на Python/NumPy."
+      },
+      {
+        "id": "e8b69190e4c1",
+        "title": "Кросс-валидация и разделение данных",
+        "url": "https://education.yandex.ru/handbook/ml/article/kross-validaciya",
+        "kind": "article",
+        "author": "Яндекс Образование · ШАД",
+        "description": "Начните с Hold-out, затем разберите ограничения случайного разбиения. Свяжите их с независимостью объектов в своём наборе данных.",
+        "focus": "Различайте HWC и CHW. Разделяйте исходные объекты до аугментаций; кадры одного источника не должны попадать одновременно в обучение и тест.",
+        "checkedAt": "07.09.2026"
+      }
+    ],
+    "challenges": [
+      {
+        "id": "image-smoother",
+        "title": "661 · Сглаживание изображения",
+        "url": "https://leetcode.com/problems/image-smoother/",
+        "difficulty": "Easy",
+        "description": "Для каждого пикселя посчитайте среднее его значения и существующих соседей в окне 3×3, округлив вниз. На краях учитывайте только пиксели внутри изображения.",
+        "prerequisites": "матрицы, границы, отдельный выходной массив"
+      },
+      {
+        "id": "transpose-matrix",
+        "title": "867 · Транспонировать матрицу",
+        "url": "https://leetcode.com/problems/transpose-matrix/",
+        "difficulty": "Easy",
+        "description": "Поменяйте строки и столбцы местами: элемент [i][j] становится элементом [j][i]. Проверьте прямоугольную матрицу.",
+        "prerequisites": "двумерные списки и индексы"
+      },
+      {
+        "id": "rotate-image",
+        "title": "48 · Поворот квадратного изображения",
+        "url": "https://leetcode.com/problems/rotate-image/",
+        "difficulty": "Medium",
+        "description": "Поверните квадратную матрицу на 90° по часовой стрелке. Измените исходную матрицу; создавать вторую матрицу по условию нельзя.",
+        "prerequisites": "Вложенные списки, индексы и обмен значений.",
+        "example": "[[1, 2], [3, 4]] → [[3, 1], [4, 2]]"
+      }
+    ]
+  },
+  "C04": {
+    "resources": [
+      {
+        "id": "292211e62228",
+        "title": "Как устроена обучающая выборка",
+        "url": "https://www.youtube.com/watch?v=WWXSxHz15hA",
+        "kind": "video",
+        "author": "Сергей Балакирев · selfedu",
+        "description": "Признаки, ответы, дисбаланс и представительность данных.",
+        "focus": "Похожие кадры могут быть одним источником информации; отделяйте независимые объекты до разбиения.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "WWXSxHz15hA",
+        "companionUrl": "https://proproprogs.ru/nn_pytorch/pytorch-formaty-predstavleniya-vyborok-sbalansirovannost-i-reprezentativnost",
+        "note": "Код PyTorch из видео выполняется локально или в notebook с установленным PyTorch. Встроенные задания темы закрепляют эти идеи на Python/NumPy."
+      },
+      {
+        "id": "3339d8c638ac",
+        "title": "Изображения и преобразования",
+        "url": "https://www.youtube.com/watch?v=L2-CEzqeYUM",
+        "kind": "video",
+        "author": "Сергей Балакирев · selfedu",
+        "description": "Загрузка размеченных изображений и последовательность трансформаций.",
+        "focus": "Аугментации выполняются после разделения источников на train и test.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "L2-CEzqeYUM",
+        "companionUrl": "https://proproprogs.ru/nn_pytorch/pytorch-transformacii-transform-klass-imagefolder",
+        "note": "Код PyTorch из видео выполняется локально или в notebook с установленным PyTorch. Встроенные задания темы закрепляют эти идеи на Python/NumPy."
+      },
+      {
+        "id": "e8b69190e4c1",
+        "title": "Кросс-валидация и разделение данных",
+        "url": "https://education.yandex.ru/handbook/ml/article/kross-validaciya",
+        "kind": "article",
+        "author": "Яндекс Образование · ШАД",
+        "description": "Начните с Hold-out, затем разберите ограничения случайного разбиения. Свяжите их с независимостью объектов в своём наборе данных.",
+        "focus": "Ищите пересечение исходных объектов, а не только имён файлов. Проверьте, что преобразования и статистики построены исключительно на train.",
+        "checkedAt": "07.09.2026"
+      }
+    ],
+    "challenges": [
+      {
+        "id": "intersection-of-two-arrays",
+        "title": "349 · Пересечение массивов",
+        "url": "https://leetcode.com/problems/intersection-of-two-arrays/",
+        "difficulty": "Easy",
+        "description": "Верните общие значения двух массивов без повторов. Порядок значений в результате не важен.",
+        "prerequisites": "множества и пересечение"
+      },
+      {
+        "id": "subsequence",
+        "title": "392 · Подпоследовательность",
+        "url": "https://leetcode.com/problems/is-subsequence/",
+        "difficulty": "Easy",
+        "description": "Можно ли получить s, удалив часть символов из t без перестановки остальных? Пустая строка подходит всегда.",
+        "prerequisites": "два указателя; цикл и строки",
+        "example": "s=\"ac\", t=\"abcd\" → True"
+      },
+      {
+        "id": "group-anagrams",
+        "title": "49 · Группы анаграмм",
+        "url": "https://leetcode.com/problems/group-anagrams/",
+        "difficulty": "Medium",
+        "description": "Объедините слова в группы: слова одной группы состоят из одинаковых букв с одинаковыми количествами. Порядок групп не важен.",
+        "prerequisites": "Словари, строки и ключ группировки.",
+        "example": "[\"tea\", \"eat\", \"cat\"] → [[\"tea\", \"eat\"], [\"cat\"]]"
+      }
+    ]
+  },
+  "L29": {
+    "resources": [
+      {
+        "id": "7f5d13141bae",
+        "title": "HTTP GET и параметры запроса",
+        "url": "https://www.youtube.com/watch?v=UcFT8k6MqGk",
+        "author": "Алексей Коледачкин",
+        "description": "Запрос к API: адрес, query-параметры, заголовки и ответ сервера.",
+        "focus": "Сначала проверьте статус ответа. Для последовательных страниц меняется параметр запроса; повторённые записи устраняются по устойчивому ID.",
+        "kind": "video",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "UcFT8k6MqGk",
+        "note": "Видео предполагает знакомство с HTTP. requests запускайте локально с timeout; встроенное задание использует синтетические страницы без внешней сети."
+      },
+      {
+        "id": "80d514a9fc30",
+        "title": "SQLite: подключение и таблицы",
+        "url": "https://www.youtube.com/watch?v=TCdyfEvrIUg",
+        "kind": "video",
+        "author": "Сергей Балакирев · selfedu",
+        "description": "Подключение к файловой базе и создание схемы.",
+        "focus": "Разделите структуру таблицы и записи; выберите уникальный ключ для повторного импорта.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "TCdyfEvrIUg",
+        "companionUrl": "https://proproprogs.ru/modules/podklyuchenie-k-bd-sozdanie-i-udalenie-tablic"
+      },
+      {
+        "id": "4ccd3275407a",
+        "title": "SQL-запросы и транзакции",
+        "url": "https://www.youtube.com/watch?v=inHiIdZBIEc",
+        "kind": "video",
+        "author": "Сергей Балакирев · selfedu",
+        "description": "execute, executemany, commit и rollback в sqlite3.",
+        "focus": "Передавайте значения параметрами запроса. Проверьте поведение при повторе и откате операции.",
+        "checkedAt": "07.09.2026",
+        "youtubeId": "inHiIdZBIEc",
+        "companionUrl": "https://proproprogs.ru/modules/metody-execute-executemany-executescript-commit-rollback"
+      }
+    ],
+    "challenges": [
+      {
+        "id": "merge-two-2d-arrays-by-summing-values",
+        "title": "2570 · Объединить значения по ID",
+        "url": "https://leetcode.com/problems/merge-two-2d-arrays-by-summing-values/",
+        "difficulty": "Easy",
+        "description": "Объедините два массива пар [id, value]. Для одинаковых ID сложите значения, а результат отсортируйте по ID.",
+        "prerequisites": "словарь, накопление и сортировка"
+      },
+      {
+        "id": "contains-duplicate",
+        "title": "217 · Найти повтор",
+        "url": "https://leetcode.com/problems/contains-duplicate/",
+        "difficulty": "Easy",
+        "description": "Определите, встречается ли хотя бы одно значение массива больше одного раза.",
+        "prerequisites": "множество или словарь"
+      },
+      {
+        "id": "design-browser-history",
+        "title": "1472 · История браузера",
+        "url": "https://leetcode.com/problems/design-browser-history/",
+        "difficulty": "Medium",
+        "description": "Реализуйте историю одной вкладки: переход на страницу, назад и вперёд на заданное число шагов. Новый переход удаляет историю впереди текущей страницы.",
+        "prerequisites": "Класс, список страниц и индекс текущей страницы.",
+        "example": "visit(\"b\"), visit(\"c\"), back(1) → \"b\""
+      }
+    ]
+  }
+}
