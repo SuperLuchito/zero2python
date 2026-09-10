@@ -8,7 +8,8 @@
     "start": "wrangler dev --config wrangler.jsonc",
     "preview": "wrangler dev --config wrangler.jsonc",
     "db:generate": "drizzle-kit generate",
-    "db:local": "wrangler d1 migrations apply DB --local --config wrangler.jsonc"
+    "db:local": "wrangler d1 migrations apply DB --local --config wrangler.jsonc",
+    "check": "node tests/check.cjs"
   },
   "dependencies": {
     "next": "^15.5.9",

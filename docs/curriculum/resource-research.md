@@ -291,4 +291,3 @@
 - LeetCode Easy: [2570 · Объединить значения по ID](https://leetcode.com/problems/merge-two-2d-arrays-by-summing-values/).
 - LeetCode Easy: [217 · Найти повтор](https://leetcode.com/problems/contains-duplicate/).
 - LeetCode Medium: [1472 · История браузера](https://leetcode.com/problems/design-browser-history/).
-
