@@ -1,4 +1,1 @@
-import { ProgressView } from "@/components/ProgressView";
-export default function Page() {
-  return <ProgressView leaderboard />;
-}
+export {default} from '../../leaderboard/page';

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const mono = IBM_Plex_Mono({
   subsets: ["latin", "cyrillic"],
@@ -9,8 +10,8 @@ const mono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "zero2python · учебный терминал",
-  description: "Python, нейросети и анализ данных для команды",
+  title: "Z₂P · Zero to Python",
+  description: "Рабочее пространство для изучения Python",
 };
 
 export default function RootLayout({
@@ -19,8 +20,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ru" className={mono.variable}>
-      <body>{children}</body>
+    <html lang="ru" className={mono.variable} suppressHydrationWarning>
+      <body><script dangerouslySetInnerHTML={{ __html: `try{document.documentElement.dataset.theme=localStorage.getItem('z2p-theme')==='light'?'light':'dark'}catch{}` }}/><ThemeToggle/>{children}</body>
     </html>
   );
 }

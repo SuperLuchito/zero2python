@@ -1,7 +1,7 @@
 # 0001. Общий прогресс команды в SQLite
 
 Дата: 2026-09-05
-Статус: Принято
+Статус: Заменено [ADR 0004](0004-sites-team-book.md) для выпуска в Sites, 2026-09-09
 Связи: [Issue #1](https://github.com/SuperLuchito/zero2python/issues/1), [система](../system.md), Q008, Q012, Q014
 
 ## Контекст

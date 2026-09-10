@@ -1,81 +1,96 @@
-import {
-  combine,
-  emptyProgress,
-  normalizeProgress,
-  mergeProgress,
-  taskKey,
-  type Progress,
-} from "./progress";
+import {profileKey,queueProgress} from './account';
 import type { TaskMark } from "./types";
-export { counts, lessonStatus, taskKey } from "./progress";
-export type { Progress } from "./progress";
-export const GUEST_KEY = "py-term.v1";
-let activeKey = GUEST_KEY;
-let current: Progress | null = null;
-let storageError = "";
-const unreadableKeys = new Set<string>();
-export const getStorageError = () => storageError;
-export const getActiveKey = () => activeKey;
-export function readProgress(key = activeKey): Progress {
-  if (typeof window === "undefined") return emptyProgress();
+
+const KEY = "py-term.v1";
+
+export type Progress = {
+  tasks: Record<string, TaskMark>;
+  qotd: Record<string, { qid: string; ok: boolean }>;
+};
+
+const empty = (): Progress => ({ tasks: {}, qotd: {} });
+
+function read(): Progress {
+  if (typeof window === "undefined") return empty();
   try {
-    const raw = localStorage.getItem(key);
-    const result = raw ? normalizeProgress(JSON.parse(raw)) : emptyProgress();
-    unreadableKeys.delete(key);
-    return result;
+    const raw = localStorage.getItem(profileKey(KEY));
+    if (!raw) return empty();
+    const parsed = JSON.parse(raw) as Progress;
+    return {
+      tasks: parsed.tasks ?? {},
+      qotd: parsed.qotd ?? {},
+    };
   } catch {
-    unreadableKeys.add(key);
-    storageError =
-      "Не удалось прочитать сохранение браузера. Проверьте доступ к хранилищу; исходные данные не удалены.";
-    return emptyProgress();
+    return empty();
   }
 }
+
+function write(p: Progress) {
+  localStorage.setItem(profileKey(KEY), JSON.stringify(p));
+}
+
+export function taskKey(lessonId: string, taskId: string) {
+  return `${lessonId}::${taskId}`;
+}
+
 export function getProgress(): Progress {
-  const saved = readProgress();
-  current = current ? mergeProgress(saved, current) : saved;
-  return current;
+  return read();
 }
-export function selectProgress(key: string, p = readProgress(key)) {
-  activeKey = key;
-  current = p;
-  window.dispatchEvent(new Event("py-term-progress"));
-}
-export function saveProgress(p: Progress, notify = true) {
-  current = p;
-  try {
-    if (unreadableKeys.has(activeKey)) {
-      // Keep the original before recovering a corrupt v1 snapshot. If storage is unavailable, this also fails safely.
-      const original = localStorage.getItem(activeKey);
-      if (original) localStorage.setItem(`${activeKey}.recovery`, original);
-      unreadableKeys.delete(activeKey);
-    }
-    localStorage.setItem(activeKey, JSON.stringify(p));
-    storageError = "";
-  } catch {
-    storageError =
-      "Не удалось сохранить прогресс в браузере. Не закрывайте страницу и повторите сохранение.";
-  }
-  if (notify) window.dispatchEvent(new Event("py-term-progress"));
+
+export function markTask(lessonId: string, taskId: string, mark: TaskMark) {
+  const p = read();
+  const k = taskKey(lessonId, taskId);
+  const prev = p.tasks[k] ?? "untouched";
+  p.tasks[k] = combine(prev, mark);
+  write(p);
+  queueProgress({kind:'tasks',key:k,value:p.tasks[k]});
   return p;
 }
-export function markTask(lesson: string, task: string, mark: TaskMark) {
-  const p = normalizeProgress(getProgress()),
-    key = taskKey(lesson, task);
-  p.tasks[key] = combine(p.tasks[key] ?? "untouched", mark);
-  return saveProgress(p);
+
+function combine(prev: TaskMark, next: TaskMark): TaskMark {
+  if (next === "hinted") {
+    if (prev === "solved") return "solved_hinted";
+    if (prev === "solved_hinted") return prev;
+    return "hinted";
+  }
+  if (next === "solved") {
+    if (prev === "hinted" || prev === "solved_hinted") return "solved_hinted";
+    return "solved";
+  }
+  if (next === "gave_up") {
+    if (prev === "solved" || prev === "solved_hinted") return prev;
+    return "gave_up";
+  }
+  return next;
 }
+
 export function markQotd(day: string, qid: string, ok: boolean) {
-  const p = normalizeProgress(getProgress());
-  p.qotd[day] ??= { qid, ok };
-  return saveProgress(p);
+  const p = read();
+  if (!p.qotd[day]) p.qotd[day] = { qid, ok };
+  write(p);
+  queueProgress({kind:'qotd',key:day,value:p.qotd[day]});
+  return p;
 }
-export function markReading(id: string, value: boolean) {
-  const p = normalizeProgress(getProgress());
-  p.book.read[id] = { value, at: Date.now() };
-  return saveProgress(p);
+
+export function lessonStatus(
+  lessonId: string,
+  taskIds: string[],
+  tasks: Record<string, TaskMark>,
+): "empty" | "hinted" | "partial" | "done" {
+  const marks = taskIds.map((id) => tasks[taskKey(lessonId, id)] ?? "untouched");
+  if (marks.every((m) => m === "untouched")) return "empty";
+  if (marks.every((m) => m === "solved" || m === "solved_hinted")) return "done";
+  if (marks.some((m) => m === "hinted" || m === "solved_hinted")) return "hinted";
+  return "partial";
 }
-export function markQuiz(id: string, answers: number[]) {
-  const p = normalizeProgress(getProgress());
-  p.book.tests[id] = { answers, at: Date.now() };
-  return saveProgress(p);
+
+export function counts(tasks: Record<string, TaskMark>, allKeys: string[]) {
+  let done = 0;
+  let hinted = 0;
+  for (const k of allKeys) {
+    const m = tasks[k];
+    if (m === "solved" || m === "solved_hinted") done += 1;
+    if (m === "hinted" || m === "solved_hinted") hinted += 1;
+  }
+  return { done, hinted, total: allKeys.length };
 }

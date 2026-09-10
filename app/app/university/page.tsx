@@ -1,4 +1,2 @@
-import { UniversityView } from "@/components/UniversityView";
-export default function Page() {
-  return <UniversityView />;
-}
+import Link from 'next/link';
+export default function Page(){return <main className="learning-home university-page"><p className="eyebrow">УНИВЕРСИТЕТСКИЙ КУРС</p><h1>Анализ данных Дубовик</h1><section className="university-empty"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M8 52V12h48v40M16 44V32m10 12V22m12 22V28m10 16V18M8 52h48"/></svg><h2>Материалы скоро появятся</h2><p>Здесь будут лекции, практические работы и задания курса. Добавим их после получения материалов преподавателя.</p><p>Необходимые темы Python укажем рядом с каждой работой, когда станет известна программа.</p><Link href="/app">Продолжить изучение Python →</Link></section></main>;}
